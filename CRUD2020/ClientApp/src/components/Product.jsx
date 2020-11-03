@@ -2,9 +2,9 @@ import React,{useState,Component } from 'react';
 import axios from "axios";
 import ReactDOM from 'react-dom';
 import { Button, Modal } from 'semantic-ui-react'
-import AddProModal from './Pro/AddProModal'
-import EditProModal from './Pro/EditProModal'
-import DeleteProModal from './Pro/EditProForm'
+import AddProduct from './Pro/AddProduct'
+import EditProduct from './Pro/EditProduct'
+import DeleteProduct from './Pro/EditProduct'
 
 
 export class Product extends Component {
@@ -44,7 +44,7 @@ export class Product extends Component {
   return (
   
 <div>
-    <AddProModal/>
+    <AddProduct/>
     <br/>
     <br/>
     <table className="table">
@@ -64,10 +64,10 @@ export class Product extends Component {
                   <th >{pro.name}</th>
                   <th>{pro.price}</th>
                   <th>
-                      <EditProModal product={pro}/>
+                      <EditProduct product={pro}/>
                   </th>
                   <th>
-                      <DeleteProModal proid={pro.id} />
+                      <DeleteProduct proid={pro.id} />
                   </th>
                 </tr>
                 )

@@ -2,9 +2,9 @@ import React,{useState,Component } from 'react'
 import axios from "axios"
 import ReactDOM from 'react-dom'
 import { Button, Modal } from 'semantic-ui-react'
-import AddStoModal from './Sto/AddStoModal'
-import EditStoModal from './Sto/EditStoModal'
-import DeleteStoModal from './Sto/DeleteStoModal'
+import AddStore from './Sto/AddStore'
+import EditStore from './Sto/EditStore'
+import DeleteStore from './Sto/DeleteStore'
 
 
 export class Store extends Component {
@@ -47,7 +47,7 @@ export class Store extends Component {
   return (
   
 <div>
-    <AddStoModal/>
+    <AddStore/>
    
     <br/>
     <br/>
@@ -68,10 +68,10 @@ export class Store extends Component {
                 <th >{sto.name}</th>
                 <th>{sto.address}</th>
                 <th>
-                  <EditStoModal store={sto}/>
+                  <EditStore store={sto}/>
                 </th>
                 <th>
-                  <DeleteStoModal stoid={sto.id} />
+                  <DeleteStore stoid={sto.id} />
                 </th>
 
               </tr>

@@ -2,9 +2,9 @@ import React,{useState,Component } from 'react'
 import axios from "axios"
 import ReactDOM from 'react-dom'
 import { Button, Modal } from 'semantic-ui-react'
-import AddCusModal from './Cus/AddCusModal'
-import EditCusModal from './Cus/EditCusModal'
-import DeleteCusModal from './Cus/DeleteCusModal'
+import AddCustomer from './Cus/AddCustomer'
+import EditCustomer from './Cus/EditCustomer'
+import DeleteCustomer from './Cus/DeleteCustomer'
 
 
 export class Customer extends Component {
@@ -45,7 +45,7 @@ export class Customer extends Component {
   return (
   
 <div>
-    <AddCusModal/>
+    <AddCustomer/>
    
     <br/>
     <br/>
@@ -66,10 +66,10 @@ export class Customer extends Component {
                 <th >{cust.name}</th>
                 <th>{cust.address}</th>
                 <th>
-                  <EditCusModal customer={cust}/>
+                  <EditCustomer customer={cust}/>
                 </th>
                 <th>
-                  <DeleteCusModal cusid={cust.id} />
+                  <DeleteCustomer cusid={cust.id} />
                 </th>
 
               </tr>

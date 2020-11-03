@@ -2,9 +2,9 @@ import React,{useState,Component } from 'react'
 import axios from "axios"
 import ReactDOM from 'react-dom'
 import { Button, Modal } from 'semantic-ui-react'
-import AddSalModal from './Sal/AddSalModal'
-import EditSalModal from './Sal/EditSalModal'
-import DeleteSalModal from './Sal/DeleteSalModal'
+import AddSale from './Sal/AddSale'
+import EditSale from './Sal/EditSale'
+import DeleteSale from './Sal/DeleteSale'
 
 
 export class Sale extends Component {
@@ -44,7 +44,7 @@ export class Sale extends Component {
   return (
   
 <div>
-    <AddSalModal/>
+    <AddSale/>
    
     <br/>
     <br/>
@@ -70,10 +70,10 @@ export class Sale extends Component {
                 <th>{sal.Store.Name}</th>
                 <th>{sal.DateSold}</th>
                 <th>
-                  <EditSalModal sales={sal}/>
+                  <EditSale sales={sal}/>
                 </th>
                 <th>
-                  <DeleteSalModal salid={sal.id} />
+                  <DeleteSale salid={sal.id} />
                 </th>
 
               </tr>
