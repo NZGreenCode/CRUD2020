@@ -11,7 +11,6 @@ export default class DeleteCustomer extends Component{
     loading: true,
 
     }
-
   }
 
   state={  modelOpen:false };

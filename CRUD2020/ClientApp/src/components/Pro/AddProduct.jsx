@@ -2,10 +2,6 @@ import React,{Component} from 'react'
 import { Form,Icon,Header,Button,Modal } from 'semantic-ui-react'
 import axios from 'axios'
 
-
-
-
-
 export default class AddProduct extends Component{
 
   constructor(props){
@@ -80,18 +76,16 @@ export default class AddProduct extends Component{
             <Form.Input
               placeholder='Name'
               label='Name'
-              required
               onChange={this.handleChangeName}
             />
             <Form.Input
               placeholder='Price'
               label='Price'
-              required
               onChange={this.handleChangePrice}
             />
             </Form.Field>
             <Form.Field >
-              <Button secondary >
+              <Button secondary onClick={this.handleClose}>
                   Cancel
               </Button>
               <Button type='submit' color='green' >

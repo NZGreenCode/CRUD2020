@@ -15,7 +15,6 @@ export class Customer extends Component {
 
      loading: true,
      customers:[],
-     customer:[]
     };
   }
 
@@ -81,7 +80,7 @@ export class Customer extends Component {
     </table>
 
 </div>
-  );
+  )
 
   }
 }

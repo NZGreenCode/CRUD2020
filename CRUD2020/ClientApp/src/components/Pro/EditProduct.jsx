@@ -2,7 +2,6 @@ import React,{Component} from 'react'
 import { Form,Icon,Header,Button,Modal } from 'semantic-ui-react'
 import axios from 'axios'
 
-
 export default class EditProduct extends Component{
       constructor(props){
 
@@ -36,7 +35,7 @@ export default class EditProduct extends Component{
       
       event.preventDefault()
 
-      axios.put('https://localhost:44376/Products/PutProduct/'+this.props.product.id,
+      axios.put('Products/PutProduct/'+this.props.product.id,
       JSON.stringify({
         Id:this.props.product.id,
         Name:this.state.Name,

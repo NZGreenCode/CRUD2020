@@ -38,7 +38,7 @@ export default class EditCustomer extends Component{
       
       event.preventDefault()
 
-      axios.put('https://localhost:44376/Customers/PutCustomer/'+ this.props.customer.id,
+      axios.put('Customers/PutCustomer/'+ this.props.customer.id,
       JSON.stringify({
         Id:this.props.customer.id,
         Name:this.state.Name,
@@ -93,8 +93,6 @@ export default class EditCustomer extends Component{
                 </Form.Field>
               </Form>
           </div>
-
-
         </Modal.Content>
       </Modal>
       </div>

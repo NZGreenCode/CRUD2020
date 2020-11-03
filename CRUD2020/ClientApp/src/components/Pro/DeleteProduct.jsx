@@ -3,16 +3,13 @@ import { Form,Icon,Header,Button,Modal } from 'semantic-ui-react'
 import axios from 'axios'
 
 
-
-export default class DeleteProModal extends Component{
+export default class DeleteProduct extends Component{
   constructor(props) {
+
     super(props)
     this.state={
-      
-
-    Name:'',
-    Price:'',
-
+    loading: true,
+   
     }
   }
 
@@ -33,7 +30,7 @@ export default class DeleteProModal extends Component{
     
     event.preventDefault()
 
-    axios.delete('https://localhost:44376/Products/DeleteProduct/'+this.props.product.id,
+    axios.delete('https://localhost:44376/Products/DeleteProduct/'+this.props.proid,
       )
     // this.setState({
     // Name:'',
