@@ -30,7 +30,7 @@ export default class DeleteProduct extends Component{
     
     event.preventDefault()
 
-    axios.delete('https://localhost:44376/Products/DeleteProduct/'+this.props.proid,
+    axios.delete('Product/DeleteProduct/'+this.props.proid,
       )
     // this.setState({
     // Name:'',
@@ -61,23 +61,13 @@ export default class DeleteProduct extends Component{
            <div>
               <Form onSubmit={this.handleSubmit}>
                 <Form.Field >
-                  <Form.Input
-                    label='Name'
-                    onChange={this.handleChangeName}
-                    defaultValue={this.props.product.Name}
-                  />
-                  <Form.Input
-                    label='price'
-                    onChange={this.handleChangePrice}
-                    defaultValue={this.props.product.Price}
-                  />
                   </Form.Field>
-                  <Form.Field>
+                  <Form.Field >
                     <Button secondary>
                         Cancel
                     </Button>
-                    <Button typet='submit' color='green' >
-                        Edit <Icon name=' edit icon'/>
+                    <Button typet='submit' color='red' >
+                        Delete <Icon name=' delete'/>
                     </Button>
                 </Form.Field>
               </Form>

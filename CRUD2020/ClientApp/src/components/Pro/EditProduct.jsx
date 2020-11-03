@@ -35,7 +35,7 @@ export default class EditProduct extends Component{
       
       event.preventDefault()
 
-      axios.put('Products/PutProduct/'+this.props.product.id,
+      axios.put('PutProduct/'+this.props.product.id,
       JSON.stringify({
         Id:this.props.product.id,
         Name:this.state.Name,
@@ -77,13 +77,13 @@ export default class EditProduct extends Component{
                     label='Name'
                     required
                     onChange={this.handleChangeName}
-                    defaultValue={this.props.product.Name}
+                    // defaultValue={this.props.product.Name}
                   />
                   <Form.Input
                     label='price'
                     required
                     onChange={this.handleChangePrice}
-                    defaultValue={this.props.product.Price}
+                    // defaultValue={this.props.product.Price}
                   />
                   </Form.Field>
                   <Form.Field>

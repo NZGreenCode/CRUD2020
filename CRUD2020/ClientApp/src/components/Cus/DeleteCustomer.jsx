@@ -32,7 +32,7 @@ export default class DeleteCustomer extends Component{
     event.preventDefault()
 
     console.log(this.state)
-    axios.delete('https://localhost:44376/Customer/DeleteCustomer/' + this.props.cusid);
+    axios.delete('Customer/DeleteCustomer/' + this.props.cusid);
 
     }
 

@@ -37,7 +37,7 @@ export default class AddCustomer extends Component{
     event.preventDefault()
   
     console.log(this.state)
-    axios.post('https://localhost:44376/Customers/PostCustomer/',
+    axios.post('Customers/PostCustomer/',
     JSON.stringify({
     Name:this.state.Name,
     Address:this.state.Address,
