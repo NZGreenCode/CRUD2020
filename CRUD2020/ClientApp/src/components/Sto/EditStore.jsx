@@ -21,7 +21,7 @@ export default class EditStore extends Component{
     state={  modelOpen:false };
 
     handleOpen=() => this.setState({modalOpen:true});
-    handleClose=()=> this.setState({modaleOpen:false}); 
+    handleClose=()=> this.setState({modalOpen:false}); 
 
     handleChangeName = event => {
       this.setState({Name:event.target.value})
@@ -88,7 +88,7 @@ export default class EditStore extends Component{
                   />
                   </Form.Field>
                   <Form.Field>
-                    <Button secondary >
+                    <Button secondary onClick={this.handleClose}>
                         Cancel
                     </Button>
                     <Button typet='submit' color='green' >

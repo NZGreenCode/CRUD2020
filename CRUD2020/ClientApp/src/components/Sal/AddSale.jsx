@@ -26,7 +26,7 @@ export default class AddSale extends Component{
   state={  modelOpen:false };
 
   handleOpen=() => this.setState({modalOpen:true});
-  handleClose=()=> this.setState({modaleOpen:false});
+  handleClose=()=> this.setState({modalOpen:false});
   
   handleChangeCusDrop = event => {
     this.setState({CustomerId:event.target.value})
@@ -185,7 +185,7 @@ export default class AddSale extends Component{
               <br/>
             <Form.Field >
               <br/>
-              <Button secondary >
+              <Button secondary onClick={this.handleClose}>
                   Cancel
               </Button>
               <Button type='submit' color='green' >

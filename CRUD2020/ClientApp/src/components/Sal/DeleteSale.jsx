@@ -16,7 +16,7 @@ export default class DeleteSale extends Component{
   state={  modelOpen:false };
 
   handleOpen=() => this.setState({modalOpen:true});
-  handleClose=()=> this.setState({modaleOpen:false});
+  handleClose=()=> this.setState({modalOpen:false});
  
   
   handleSubmit=event=>{
@@ -55,7 +55,7 @@ export default class DeleteSale extends Component{
                 
                 </Form.Field>
                 <Form.Field>
-                  <Button secondary>
+                  <Button secondary onClick={this.handleClose}>
                       Cancel
                   </Button>
                   <Button typet='submit' color='red' >

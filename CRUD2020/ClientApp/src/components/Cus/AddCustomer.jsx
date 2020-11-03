@@ -21,7 +21,7 @@ export default class AddCustomer extends Component{
   state={  modelOpen:false };
 
   handleOpen=() => this.setState({modalOpen:true});
-  handleClose=()=> this.setState({modaleOpen:false});
+  handleClose=()=> this.setState({modalOpen:false});
 
   handleChangeName = event => {
     this.setState({Name:event.target.value})
@@ -51,7 +51,8 @@ export default class AddCustomer extends Component{
   Name:'',
   Address:'',
   })
-  
+  this.setState({modalOpen:false});
+
   }
   
 

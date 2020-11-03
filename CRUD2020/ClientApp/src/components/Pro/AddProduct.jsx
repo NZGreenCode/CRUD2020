@@ -20,7 +20,7 @@ export default class AddProduct extends Component{
   state={  modelOpen:false };
 
   handleOpen=() => this.setState({modalOpen:true});
-  handleClose=()=> this.setState({modaleOpen:false});
+  handleClose=()=> this.setState({modalOpen:false});
 
 
 

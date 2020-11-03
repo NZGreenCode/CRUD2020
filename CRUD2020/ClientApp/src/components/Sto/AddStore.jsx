@@ -22,7 +22,7 @@ export default class AddStore extends Component{
   state={  modelOpen:false };
 
   handleOpen=() => this.setState({modalOpen:true});
-  handleClose=()=> this.setState({modaleOpen:false});
+  handleClose=()=> this.setState({modalOpen:false});
  
   
   handleChangeName = event => {
@@ -85,7 +85,7 @@ export default class AddStore extends Component{
             />
             </Form.Field>
             <Form.Field >
-              <Button secondary >
+              <Button secondary onClick={this.handleClose}>
                   Cancel
               </Button>
               <Button type='submit' color='green' >
