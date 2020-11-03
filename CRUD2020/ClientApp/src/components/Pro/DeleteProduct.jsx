@@ -30,7 +30,7 @@ export default class DeleteProduct extends Component{
     
     event.preventDefault()
 
-    axios.delete('Product/DeleteProduct/'+this.props.proid,
+    axios.delete('https://localhost:44376/Product/DeleteProduct/'+this.props.proid,
       )
     // this.setState({
     // Name:'',
