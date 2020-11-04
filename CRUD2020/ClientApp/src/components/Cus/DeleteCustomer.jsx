@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
 import { Form,Icon,Header,Button,Modal } from 'semantic-ui-react'
 import axios from 'axios'
-
+import { useHistory } from 'react-router'
 
 export default class DeleteCustomer extends Component{
   constructor(props){
@@ -28,14 +28,18 @@ export default class DeleteCustomer extends Component{
   }
 
   handleSubmit=event=>{
-    
-    event.preventDefault()
 
+    event.preventDefault()
+    
     console.log(this.state)
     axios.delete('Customer/DeleteCustomer/' + this.props.cusid);
-    this.setState({modalOpen:false});
-
+    // this.setState({modalOpen:false});
+    reload = () => {
+      this.props.history.push('/Customer')
+   };
+  
   }
+
 
   render() {
 

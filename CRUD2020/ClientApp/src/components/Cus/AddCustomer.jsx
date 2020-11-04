@@ -1,6 +1,10 @@
 import React,{Component} from 'react'
 import { Form,Icon,Header,Button,Modal } from 'semantic-ui-react'
 import axios from 'axios'
+import { browserHistory } from 'react-router';
+import { withRouter } from "react-router";
+
+
 
 export default class AddCustomer extends Component{
   
@@ -33,7 +37,7 @@ export default class AddCustomer extends Component{
   }
   
   handleSubmit=event=>{
-    
+
     event.preventDefault()
   
     console.log(this.state)
@@ -45,13 +49,14 @@ export default class AddCustomer extends Component{
   { headers: {'Content-Type': 'application/json','Accept': 'application/json'}})
   .then(prediction=>{
     console.log(prediction);
+
   })
   
-  this.setState({
-  Name:'',
-  Address:'',
-  })
-  this.setState({modalOpen:false});
+  // this.setState({
+  // Name:'',
+  // Address:'',
+  // })
+  // this.setState({modalOpen:false});
 
   }
   

@@ -49,8 +49,8 @@ export default class EditCustomer extends Component{
       .then(prediction=>{
         console.log(prediction);
       })
-      handleClose=()=> this.setState({modalOpen:false});
-      
+      this.setState({modalOpen:false});
+
     }
 
   render() {
