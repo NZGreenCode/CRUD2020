@@ -32,10 +32,6 @@ export default class DeleteProduct extends Component{
 
     axios.delete('https://localhost:44376/Product/DeleteProduct/'+this.props.proid,
       )
-    // this.setState({
-    // Name:'',
-    // Address:'',
-    // })
   }
 
   render() {

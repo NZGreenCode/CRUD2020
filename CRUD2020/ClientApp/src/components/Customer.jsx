@@ -44,7 +44,7 @@ export class Customer extends Component {
   return (
   
 <div>
-    <AddCustomer/>
+    <AddCustomer customers={this.getAllCustomers}/>
    
     <br/>
     <br/>
@@ -65,10 +65,10 @@ export class Customer extends Component {
                 <th >{cust.name}</th>
                 <th>{cust.address}</th>
                 <th>
-                  <EditCustomer customer={cust}/>
+                  <EditCustomer customer={cust} customers={this.getAllCustomers}/>
                 </th>
                 <th>
-                  <DeleteCustomer cusid={cust.id} />
+                  <DeleteCustomer cusid={cust.id} customers={this.getAllCustomers} />
                 </th>
 
               </tr>

@@ -43,7 +43,7 @@ export class Product extends Component {
   return (
   
 <div>
-    <AddProduct/>
+    <AddProduct    products={this.getAllProducts}/>
     <br/>
     <br/>
     <table className="table">
@@ -63,10 +63,10 @@ export class Product extends Component {
                   <th >{pro.name}</th>
                   <th>{pro.price}</th>
                   <th>
-                      <EditProduct product={pro}/>
+                      <EditProduct product={pro} products={this.getAllProducts}/>
                   </th>
                   <th>
-                      <DeleteProduct proid={pro.id} />
+                      <DeleteProduct proid={pro.id} products={this.getAllProducts}/>
                   </th>
                 </tr>
                 )

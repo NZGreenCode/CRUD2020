@@ -48,6 +48,7 @@ export default class EditCustomer extends Component{
       { headers: {'Content-Type': 'application/json','Accept': 'application/json'}})
       .then(prediction=>{
         console.log(prediction);
+        this.props.customers();
       })
       this.setState({modalOpen:false});
 

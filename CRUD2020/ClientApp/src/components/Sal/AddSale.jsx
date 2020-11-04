@@ -10,15 +10,14 @@ export default class AddSale extends Component{
     super(props)
     this.state={
       
-      customers:[],
-      products:[],
-      stores:[],
+      customer:[],
+      product:[],
+      store:[],
       Id:'',
       ProductId:'',
       CustomerId:'',
       StoreId:'',
       DateSold:'',
-      modelOpen:false
     }
 
 }
@@ -64,13 +63,7 @@ export default class AddSale extends Component{
           console.log(prediction);
         })
     
-        this.setState({
-        Name:'',
-        Address:'',
-        })
-    
-        }
-
+      }
   componentDidMount(){
     this.getAllCustomer();
     this.getAllProduct();
@@ -159,7 +152,7 @@ export default class AddSale extends Component{
             placeholder='customers'
             selection
             search
-            options={customer}
+            options=
             onChange={this.handleChangeCusDrop}
             />
             <br/>

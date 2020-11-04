@@ -30,14 +30,15 @@ export default class DeleteCustomer extends Component{
   handleSubmit=event=>{
 
     event.preventDefault()
-    
+
     console.log(this.state)
-    axios.delete('Customer/DeleteCustomer/' + this.props.cusid);
-    // this.setState({modalOpen:false});
-    reload = () => {
-      this.props.history.push('/Customer')
-   };
-  
+    axios.delete('Customers/DeleteCustomer/' + this.props.cusid);
+    // .then(prediction=>{
+    //   console.log(prediction);
+    //   this.props.customers();
+    // })
+    this.setState({modalOpen:false});
+    
   }
 
 

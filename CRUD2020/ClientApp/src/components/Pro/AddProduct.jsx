@@ -46,8 +46,10 @@ export default class AddProduct extends Component{
   { headers: {'Content-Type': 'application/json','Accept': 'application/json'}})
   .then(prediction=>{
     console.log(prediction);
+    this.props.products();
   })
-  
+   this.setState({modalOpen:false});
+
   this.setState({
   Name:'',
   Price:'',

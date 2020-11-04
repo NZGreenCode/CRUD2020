@@ -49,14 +49,9 @@ export default class AddCustomer extends Component{
   { headers: {'Content-Type': 'application/json','Accept': 'application/json'}})
   .then(prediction=>{
     console.log(prediction);
-
+    this.props.customers();
   })
-  
-  // this.setState({
-  // Name:'',
-  // Address:'',
-  // })
-  // this.setState({modalOpen:false});
+  this.setState({modalOpen:false});
 
   }
   
