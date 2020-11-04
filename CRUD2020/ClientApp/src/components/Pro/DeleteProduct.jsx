@@ -34,9 +34,9 @@ export default class DeleteProduct extends Component{
       )
       .then(prediction=>{
         console.log(prediction);
-        this.props.products();
       })
-       this.setState({modalOpen:false});
+      this.props.products();
+      this.setState({modalOpen:false});
     
   }
 

@@ -44,7 +44,7 @@ export default class EditProduct extends Component{
       { headers: {'Content-Type': 'application/json','Accept': 'application/json'}})
       .then(prediction=>{
         console.log(prediction);
-        this.props.product();
+        this.props.products();
       })
         this.setState({modalOpen:false});
         // this.setState({
