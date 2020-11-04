@@ -61,7 +61,9 @@ export default class AddSale extends Component{
       { headers: {'Content-Type': 'application/json','Accept': 'application/json'}})
         .then(prediction=>{
           console.log(prediction);
+          this.props.sales();
         })
+        this.setState({modalOpen:false});
     
       }
   componentDidMount(){
@@ -152,7 +154,7 @@ export default class AddSale extends Component{
             placeholder='customers'
             selection
             search
-            options=
+            options={customer}
             onChange={this.handleChangeCusDrop}
             />
             <br/>

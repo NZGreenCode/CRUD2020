@@ -44,7 +44,7 @@ export class Sale extends Component {
   return (
   
 <div>
-    <AddSale/>
+    <AddSale  Sales={this.getAllSales}/>
    
     <br/>
     <br/>
@@ -70,10 +70,10 @@ export class Sale extends Component {
                 <th>{sal.Store.Name}</th>
                 <th>{sal.DateSold}</th>
                 <th>
-                  <EditSale sales={sal}/>
+                  <EditSale sale={sal} sales={this.getAllSales}/>
                 </th>
                 <th>
-                  <DeleteSale salid={sal.id} />
+                  <DeleteSale salid={sal.id} sales={this.getAllSales}/>
                 </th>
 
               </tr>

@@ -47,7 +47,7 @@ export class Store extends Component {
   return (
   
 <div>
-    <AddStore/>
+    <AddStore  Stores={this.getAllStores}/>
    
     <br/>
     <br/>
@@ -68,10 +68,10 @@ export class Store extends Component {
                 <th >{sto.name}</th>
                 <th>{sto.address}</th>
                 <th>
-                  <EditStore store={sto}/>
+                  <EditStore store={sto} Stores={this.getAllStores}/>
                 </th>
                 <th>
-                  <DeleteStore stoid={sto.id} />
+                  <DeleteStore stoid={sto.id} Stores={this.getAllStores} />
                 </th>
 
               </tr>

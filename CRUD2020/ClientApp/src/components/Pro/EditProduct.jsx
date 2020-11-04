@@ -46,8 +46,8 @@ export default class EditProduct extends Component{
         console.log(prediction);
         this.props.product();
       })
-
-      // this.setState({
+        this.setState({modalOpen:false});
+        // this.setState({
       // Name:'',
       // Address:'',
       // })

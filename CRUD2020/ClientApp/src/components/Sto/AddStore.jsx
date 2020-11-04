@@ -47,8 +47,11 @@ export default class AddStore extends Component{
   { headers: {'Content-Type': 'application/json','Accept': 'application/json'}})
   .then(prediction=>{
     console.log(prediction);
+    this.props.stores();
   })
-  
+  this.setState({modalOpen:false});
+
+
   this.setState({
   Name:'',
   Address:'',

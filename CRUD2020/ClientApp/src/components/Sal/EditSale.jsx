@@ -44,8 +44,9 @@ export default class EditSalModal extends Component{
       { headers: {'Content-Type': 'application/json','Accept': 'application/json'}})
       .then(prediction=>{
         console.log(prediction);
+        this.props.sales();
       })
-
+        this.setState({modalOpen:false});
     }
 
   render() {

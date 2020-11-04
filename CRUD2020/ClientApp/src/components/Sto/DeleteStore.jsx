@@ -33,9 +33,9 @@ export default class DeleteStore extends Component{
 
     console.log(this.state)
     axios.delete('https://localhost:44376/Stores/DeleteStore/' + this.props.stoid);
-
+    this.props.sales();
+    this.setState({modalOpen:false});
     }
-
 
 
 

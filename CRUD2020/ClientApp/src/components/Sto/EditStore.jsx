@@ -49,8 +49,9 @@ export default class EditStore extends Component{
       { headers: {'Content-Type': 'application/json','Accept': 'application/json'}})
       .then(prediction=>{
         console.log(prediction);
-      })
-
+         this.props.stores();
+      })   
+    this.setState({modalOpen:false});
     }
       
 
