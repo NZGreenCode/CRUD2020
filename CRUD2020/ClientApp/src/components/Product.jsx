@@ -27,7 +27,7 @@ export class Product extends Component {
     getAllProducts=()=>{
   
       // Make a request for a user with a given ID
-      axios.get(`Products/GetProduct`)
+      axios.get(`https://localhost:44376/Products/GetProduct`)
       .then((res)=> {
         this.setState({products:res.data})
       })

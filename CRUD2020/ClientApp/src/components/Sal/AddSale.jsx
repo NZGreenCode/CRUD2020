@@ -1,6 +1,7 @@
 import React,{Component} from 'react'
-import { Form,Icon,Header,Button,Dropdown,Modal  } from 'semantic-ui-react'
+import { Form,Icon,Header,Button,Modal,Dropdown  } from 'semantic-ui-react'
 import axios from 'axios'
+import 'react-dropdown/style.css';
 
 
 export default class AddSale extends Component{
@@ -18,6 +19,7 @@ export default class AddSale extends Component{
       CustomerId:'',
       StoreId:'',
       DateSold:'',
+      optionsCus:[]
     }
 
 }
@@ -123,6 +125,15 @@ export default class AddSale extends Component{
     const {product}=this.state;
     const {store}=this.state;
 
+    const optionsCus=[
+      
+      customer.map((cusOp)=>{
+      return(`{ key: ${cusOp.Id}, value: ${cusOp.Id}, flag: ${cusOp.Id}, text: ${cusOp.name}},`)
+    })];
+
+    const defaultOption = optionsCus[0];
+
+
 
     return (
       <div>
@@ -150,13 +161,13 @@ export default class AddSale extends Component{
             <br/>      
             Customer
             
-            <Dropdown
-            placeholder='customers'
-            selection
+            <Dropdown 
+            options={optionsCus} 
+            fluid
             search
-            options={customer}
-            onChange={this.handleChangeCusDrop}
-            />
+            selection           
+             placeholder="Customer"            
+            onChange={this.handleChangeCusDrop}/> 
             <br/>
             <br/>
               <Dropdown

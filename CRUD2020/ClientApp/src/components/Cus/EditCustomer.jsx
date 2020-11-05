@@ -10,10 +10,7 @@ export default class EditCustomer extends Component{
     this.state={
       
 
-    Name:'',
-    Address:'',
-
-    }
+       }
 
   }
 

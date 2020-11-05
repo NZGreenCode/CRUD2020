@@ -46,7 +46,7 @@ export default class AddCustomer extends Component{
     Name:this.state.Name,
     Address:this.state.Address,
   }),
-  { headers: {'Content-Type': 'application/json','Accept': 'application/json'}})
+       { headers: {'Content-Type': 'application/json','Accept': 'application/json'}})
   .then(prediction=>{
     console.log(prediction);
     this.props.customers();

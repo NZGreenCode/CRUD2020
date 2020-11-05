@@ -37,8 +37,8 @@ export default class AddProduct extends Component{
     
     event.preventDefault()
   
-    console.log(this.state)
-    axios.post('Product/PostProduct/',
+              console.log(this.state)
+    axios.post('Products/PostProduct/',
     JSON.stringify({
     Name:this.state.Name,
     Price:this.state.Price,
@@ -46,14 +46,12 @@ export default class AddProduct extends Component{
   { headers: {'Content-Type': 'application/json','Accept': 'application/json'}})
   .then(prediction=>{
     console.log(prediction);
-    this.props.products();
   })
-   this.setState({modalOpen:false});
 
-  this.setState({
-  Name:'',
-  Price:'',
-  })
+  // this.setState({
+  // Name:'',
+  // Price:'',
+  // })
   
   }
   
