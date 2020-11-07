@@ -1,6 +1,7 @@
 import React,{Component} from 'react'
 import { Form,Icon,Header,Button,Modal } from 'semantic-ui-react'
 import axios from 'axios'
+import 'react-dropdown/style.css'
 
 export default class EditSalModal extends Component{
   constructor(props){
@@ -9,9 +10,9 @@ export default class EditSalModal extends Component{
     this.state={
       
 
-    Name:'',
-    Address:'',
-
+      customer:[],
+      product:[],
+      store:[],
     }
 
   }
@@ -21,33 +22,92 @@ export default class EditSalModal extends Component{
     handleOpen=() => this.setState({modalOpen:true});
     handleClose=()=> this.setState({modalOpen:false}); 
 
-    handleChangeName = event => {
-      this.setState({Name:event.target.value})
-    }
-
-    handleChangeAddress = event => {
-    this.setState({Address:event.target.value})
+  handleChangeCusDrop = event => {
+    this.setState({CustomerId:event.target.value})
+      }
+    
+    handleChangeProDrop = event => {
+      this.setState({ProductId:event.target.value})
+      }
+    
+    handleChangeStoDrop = event => {
+        this.setState({StoreId:event.target.value})
+      }
+    
+    handleChangeDate = event => {
+      this.setState({Date:event.target.value})
     }
 
     handleSubmit=event=>{
       
       event.preventDefault()
 
-      axios.put('https://localhost:44376/Sales/PutSale/'+this.props.sale.id,
+      axios.put('https://localhost:44376/Sales/PutSales/'+this.props.sale.id,
       JSON.stringify({
         Id:this.props.sale.id,
-        DateSold:this.state.DataSold,
-        CustomerId:this.state.custId,
-        ProductId:this.state.proId,
-        StoreId:this.state.sale.stoId
+        ProductId:this.state.ProductId,
+        CustomerId:this.state.CustomerId,
+        StoreId:this.state.StoreId,
+        DateSold:this.state.Date,
       }),
       { headers: {'Content-Type': 'application/json','Accept': 'application/json'}})
       .then(prediction=>{
-        console.log(prediction);
-        this.props.sales();
-      })
+          console.log(prediction);
+          this.props.sales();
+        })
         this.setState({modalOpen:false});
     }
+
+     componentDidMount(){
+    this.getAllCustomer();
+    this.getAllProduct();
+    this.getAllStore();
+  }
+
+  getAllCustomer=()=>{
+
+    // Make a request for a user with a given ID
+    axios.get(`https://localhost:44376/Customers/GetCustomer`)
+    .then( (res)=> {
+      console.log(res.data);
+      this.setState({customer:res.data})
+      this.props.sales();
+
+    })
+    .catch((err)=> {
+      console.log(err);
+    });
+    
+  }
+
+  getAllProduct=()=>{
+    
+    // Make a request for a user with a given ID
+    axios.get(`https://localhost:44376/Products/GetProduct`)
+    .then( (res)=> {
+      // console.log(res.data);
+      this.setState({product:res.data})
+      this.props.sales();
+    })
+    .catch((err)=> {
+      console.log(err);
+    });
+
+  }
+
+    getAllStore=()=>{
+
+      // Make a request for a user with a given ID
+          axios.get(`Stores/GetStore`)
+          .then( (res)=> {
+            console.log(res.data);
+            this.setState({store:res.data})
+          })
+          .catch((err)=> {
+            console.log(err);
+          });
+  }
+
 
   render() {
     const {sale}= this.props;
@@ -55,77 +115,85 @@ export default class EditSalModal extends Component{
     const {product}=this.state;
     const {store}=this.state;
 
+
     return (
       <div>
+      <Button color="yellow" onClick={ (e) => this.setState({modalOpen: true})}>
+      <i aria-hidden="true" class="edit icon" ></i>
+      EDIT</Button>
+
       <Modal
         open={this.state.modalOpen}
         onClose={this.handleClose}
         closeIcon
         centered={false}
-        trigger={<Button color="yellow">
-        <i aria-hidden="true" class="edit icon" ></i>
-          EDIT </Button>}
       >
         <Modal.Header>Edit Sale</Modal.Header>
         <Modal.Content>
 
         <div class='ui container'>
             <Form onSubmit={this.handleSubmit}>
-                Date Sold 
-                <br/>
-                <input
-                type='date'
-                name='dateSold'
-                pladeholder='date sold'
-                onChange={this.handleChangeDate}
-                defaultvalue={this.props.sal.DateSold}
-                />
-                <br/>      
-                Customer
+            <label>Date Sold</label> 
+            <br/>
+            <input
+            type='date'
+            name='dateSold'
+            required
+            onChange={this.handleChangeDate}
+            defaultValue={this.props.sale.datesold}
+            />
+            <br/>
+            <br/>      
+            <label>Customer</label> 
+            <select 
+            defaultValue={this.props.sale.customer}
+            >
+              {customer.map((cusOp)=>(
+                <option 
+                key={cusOp.Id} 
+                value={cusOp.name} 
+                onChange={this.handleChangeCusDrop}
+                >{cusOp.name}</option>
+              )
+              )};
+            </select>
+            <br/>
+            <br/>
+            <label>Product</label> 
+            <select 
+            defaultValue={this.props.sale.product}
+            >
+              {product.map((proOp)=>(
+                <option 
+                key={proOp.Id} 
+                value={proOp.name}
+                onChange={this.handleChangeProDrop}
                 
-                <select placeholder='Customer'
-                  onChange={this.handleChangeCusDrop} 
-                  defaultvalue={this.props.sal.custId}>
-
-                {customer.map((cust)=>{
-                  return(
-                      <option key={cust.Id}>{cust.name}</option>
-                   )
-                  })
-                }
-                 </select><br/>
-                 Product
-                 <select placeholder='Product'
-                  onChange={this.handleChangeProDrop}
-                  defaultvalue={this.props.sal.proId}
-                  >
-
-                {product.map((pro)=>{
-                  return(
-                      <option key={pro.Id}>{pro.name}</option>
-                   )
-                  })
-                }
-                 </select><br/>
-                 Store
-                 <select placeholder='Store'
-                  onChange={this.handleChangeStoDrop}
-                  defaultvalue={this.props.sal.stoId}
-                  >
-                  {store.map((sto)=>{
-                    return(
-                    <option key={sto.Id}>{sto.name}</option>
-                  )
-                   })
-                 }
-                 </select><br/>
+                >{proOp.name}</option>
+              )
+              )};
+            </select>
+             <br/>
+             <br/>
+             Store
+            <select>
+              {store.map((stoOp)=>(
+                <option 
+                key={stoOp.Id} 
+                value={stoOp.name}
+                onChange={this.handleChangeStoDrop}
+                deafaultvalue={this.props.sale.store}
+                >{stoOp.name}</option>
+              )
+              )};
+            </select>
                 <Form.Field >
                   <br/>
                   <Button secondary onClick={this.handleClose} >
                       Cancel
                   </Button>
                   <Button type='submit' color='green' >
-                      Create <Icon name='checkmark'/>
+                      Edit <Icon name='checkmark'/>
                   </Button>
                 </Form.Field>
             </Form>

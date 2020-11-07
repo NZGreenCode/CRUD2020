@@ -47,28 +47,25 @@ export default class EditStore extends Component{
 
       }),
       { headers: {'Content-Type': 'application/json','Accept': 'application/json'}})
-      .then(prediction=>{
+      .then(prediction=>{         
         console.log(prediction);
-         this.props.stores();
+        this.props.stores();
       })   
     this.setState({modalOpen:false});
     }
-      
-
-
 
   render() {
 
     return (
       <div>
+        <Button color="yellow" onClick={ (e) => this.setState({modalOpen: true})}>
+        <i aria-hidden="true" class="edit icon" ></i>
+          EDIT </Button>
       <Modal
         open={this.state.modalOpen}
         onClose={this.handleClose}
         closeIcon
         centered={false}
-        trigger={<Button color="yellow">
-        <i aria-hidden="true" class="edit icon" ></i>
-          EDIT </Button>}
       >
         <Modal.Header>Edit Store</Modal.Header>
         <Modal.Content>
@@ -78,12 +75,14 @@ export default class EditStore extends Component{
                 <Form.Field >
                   <Form.Input
                     label='Name'
+                    required
                     onChange={this.handleChangeName}
                     defaultValue={this.props.store.name}
                     
                   />
                   <Form.Input
                     label='Address'
+                    required
                     onChange={this.handleChangeAddress}
                     defaultValue={this.props.store.address}
                   />

@@ -23,28 +23,28 @@ export default class DeleteSale extends Component{
       
     event.preventDefault()
 
-    console.log(this.state)
-    axios.delete('https://localhost:44376/Sales/deleteSale/' + this.props.salid);
-
+    console.log(this.state);
+    axios.delete('https://localhost:44376/Sales/DeleteSales/' + this.props.salid)
+        // this.props.sales();
+        // window.location.reload();
+        this.props.sales();
     }
-
-  render() {
+    render() {
 
     // const {  salid } = this.props;
     // console.log("Sal Id" + salid)
 
     return (
       <div>
-      <Modal
+      <Button color="red" onClick={ (e) => this.setState({modalOpen: true})}>
+      <i aria-hidden="true" class="delete icon"></i>
+      DELETE</Button>
+        <Modal
         open={this.state.modalOpen}
         onClose={this.handleClose}
         closeIcon
         centered={false}
-        trigger={<Button 
-          color="red">
-          <i aria-hidden="true" class="delete icon"></i>
-          DELETE</Button>}
-      >
+        > 
         <Modal.Header>Delete Sale</Modal.Header>
         <Modal.Content>
            <Modal.Description>Are you sure? </Modal.Description>
@@ -64,7 +64,6 @@ export default class DeleteSale extends Component{
                 </Form.Field>
             </Form>
           </div> 
-
         </Modal.Content>
       </Modal>
       </div>

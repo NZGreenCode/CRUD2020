@@ -5,6 +5,7 @@ import { Button, Modal } from 'semantic-ui-react'
 import AddCustomer from './Cus/AddCustomer'
 import EditCustomer from './Cus/EditCustomer'
 import DeleteCustomer from './Cus/DeleteCustomer'
+import  Pagination  from './Pagination'
 
 
 export class Customer extends Component {

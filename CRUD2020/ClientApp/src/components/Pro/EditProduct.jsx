@@ -9,9 +9,6 @@ export default class EditProduct extends Component{
         this.state={
           
 
-        Name:'',
-        Price:'',
-
         }
 
       }
@@ -50,18 +47,19 @@ export default class EditProduct extends Component{
     }
 
     render() {
-console.log(this.props.product);
-
+  console.log(this.props.product.name);
+  console.log(this.props.product.price);
+    console.log("TestName")
     return (
       <div>
+        <Button color="yellow" onClick={ (e) => this.setState({modalOpen: true})}>
+        <i aria-hidden="true" class="edit icon" ></i>
+          EDIT </Button>
       <Modal
         open={this.state.modalOpen}
         onClose={this.handleClose}
         closeIcon
         centered={false}
-        trigger={<Button color="yellow">
-        <i aria-hidden="true" class="edit icon" ></i>
-          EDIT </Button>}
       >
         <Modal.Header>Edit Product</Modal.Header>
         <Modal.Content>
@@ -72,13 +70,13 @@ console.log(this.props.product);
                     label='Name'
                     required
                     onChange={this.handleChangeName}
-                    defaultValue={this.props.product.Name}
+                    defaultValue={this.props.product.name}
                   />
                   <Form.Input
                     label='price'
                     required
                     onChange={this.handleChangePrice}
-                    defaultValue={this.props.product.Price}
+                    defaultValue={this.props.product.price}
                   />
                   </Form.Field>
                   <Form.Field>

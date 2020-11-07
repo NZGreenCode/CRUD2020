@@ -5,6 +5,7 @@ import { Button, Modal } from 'semantic-ui-react'
 import AddStore from './Sto/AddStore'
 import EditStore from './Sto/EditStore'
 import DeleteStore from './Sto/DeleteStore'
+import  Pagination  from './Pagination'
 
 
 export class Store extends Component {
@@ -47,7 +48,7 @@ export class Store extends Component {
   return (
   
 <div>
-    <AddStore  Stores={this.getAllStores}/>
+    <AddStore  stores={this.getAllStores}/>
    
     <br/>
     <br/>
@@ -68,10 +69,10 @@ export class Store extends Component {
                 <th >{sto.name}</th>
                 <th>{sto.address}</th>
                 <th>
-                  <EditStore store={sto} Stores={this.getAllStores}/>
+                  <EditStore store={sto} stores={this.getAllStores}/>
                 </th>
                 <th>
-                  <DeleteStore stoid={sto.id} Stores={this.getAllStores} />
+                  <DeleteStore stoid={sto.id} stores={this.getAllStores} />
                 </th>
 
               </tr>

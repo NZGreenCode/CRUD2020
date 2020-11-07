@@ -5,6 +5,7 @@ import { Button, Modal } from 'semantic-ui-react'
 import AddProduct from './Pro/AddProduct'
 import EditProduct from './Pro/EditProduct'
 import DeleteProduct from './Pro/DeleteProduct'
+import  Pagination  from './Pagination'
 
 
 export class Product extends Component {

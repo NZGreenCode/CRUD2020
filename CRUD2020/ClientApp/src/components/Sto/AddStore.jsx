@@ -64,12 +64,12 @@ export default class AddStore extends Component{
 
     return (
       <div>
+      <Button primary onClick={ (e) => this.setState({modalOpen: true})}>New Store</Button>
       <Modal
         open={this.state.modalOpen}
         onClose={this.handleClose}
         closeIcon
         centered={false}
-        trigger={<Button primary>New Store</Button>}
       >
         <Modal.Header>Create Store</Modal.Header>
         <Modal.Content>
@@ -79,11 +79,13 @@ export default class AddStore extends Component{
             <Form.Input
               placeholder='Name'
               label='Name'
+              required
               onChange={this.handleChangeName}
             />
             <Form.Input
               placeholder='Address'
               label='Address'
+              required
               onChange={this.handleChangeAddress}
             />
             </Form.Field>

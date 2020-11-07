@@ -61,12 +61,13 @@ export default class AddCustomer extends Component{
 
     return (
       <div>
+      <Button primary onClick={ (e) => this.setState({modalOpen: true})}>New Customer</Button>
+
       <Modal
         open={this.state.modalOpen}
         onClose={this.handleClose}
         closeIcon
         centered={false}
-        trigger={<Button primary>New Customer</Button>}
       >
         <Modal.Header>Create Customer</Modal.Header>
         <Modal.Content>
@@ -77,11 +78,13 @@ export default class AddCustomer extends Component{
             <Form.Input
               placeholder='Name'
               label='Name'
+              required
               onChange={this.handleChangeName}
             />
             <Form.Input
               placeholder='Address'
               label='Address'
+              required
               onChange={this.handleChangeAddress}
             />
             </Form.Field>

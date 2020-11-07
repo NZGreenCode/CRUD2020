@@ -37,7 +37,7 @@ export default class AddProduct extends Component{
     
     event.preventDefault()
   
-              console.log(this.state)
+    console.log(this.state)
     axios.post('Products/PostProduct/',
     JSON.stringify({
     Name:this.state.Name,
@@ -46,12 +46,10 @@ export default class AddProduct extends Component{
   { headers: {'Content-Type': 'application/json','Accept': 'application/json'}})
   .then(prediction=>{
     console.log(prediction);
-  })
+    this.props.products();
 
-  // this.setState({
-  // Name:'',
-  // Price:'',
-  // })
+  })
+  this.setState({modalOpen:false});
   
   }
   
@@ -60,12 +58,12 @@ export default class AddProduct extends Component{
 
     return (
       <div>
+        <Button primary onClick={ (e) => this.setState({modalOpen: true})}>New Product</Button>
       <Modal
         open={this.state.modalOpen}
         onClose={this.handleClose}
         closeIcon
         centered={false}
-        trigger={<Button primary>New Product</Button>}
       >
         <Modal.Header>Create Product</Modal.Header>
         <Modal.Content>
@@ -76,11 +74,13 @@ export default class AddProduct extends Component{
             <Form.Input
               placeholder='Name'
               label='Name'
+              required
               onChange={this.handleChangeName}
             />
             <Form.Input
               placeholder='Price'
               label='Price'
+              required
               onChange={this.handleChangePrice}
             />
             </Form.Field>

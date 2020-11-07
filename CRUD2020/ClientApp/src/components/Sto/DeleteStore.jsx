@@ -33,7 +33,7 @@ export default class DeleteStore extends Component{
 
     console.log(this.state)
     axios.delete('https://localhost:44376/Stores/DeleteStore/' + this.props.stoid);
-    this.props.sales();
+    this.props.stores();
     this.setState({modalOpen:false});
     }
 
@@ -47,16 +47,15 @@ export default class DeleteStore extends Component{
 
     return (
       <div>
+      <Button color="red" onClick={ (e) => this.setState({modalOpen: true})}>
+        <i aria-hidden="true" class="delete icon"></i>
+        DELETE</Button>
       <Modal
         open={this.state.modalOpen}
         onClose={this.handleClose}
         closeIcon
         centered={false}
-        trigger={<Button 
-          color="red">
-          <i aria-hidden="true" class="delete icon"></i>
-          DELETE</Button>}
-      >
+     >
         <Modal.Header>Delete Store</Modal.Header>
         <Modal.Content>
            <Modal.Description>Are you sure? </Modal.Description>

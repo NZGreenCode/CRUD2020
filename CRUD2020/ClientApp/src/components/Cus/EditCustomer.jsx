@@ -8,11 +8,13 @@ export default class EditCustomer extends Component{
 
     super(props)
     this.state={
-      
 
+        name:this.props.customer.name,
+        address:this.props.customer.address
        }
 
   }
+    ;
 
     state={  modelOpen:false };
 
@@ -26,9 +28,6 @@ export default class EditCustomer extends Component{
     handleChangeAddress = event => {
     this.setState({Address:event.target.value})
     }
-
-
-      
 
 
     handleSubmit=event=>{
@@ -55,14 +54,14 @@ export default class EditCustomer extends Component{
 
     return (
       <div>
+        <Button color="yellow" onClick={ (e) => this.setState({modalOpen: true})}>
+        <i aria-hidden="true" class="edit icon" ></i>
+          EDIT </Button>
       <Modal
         open={this.state.modalOpen}
         onClose={this.handleClose}
         closeIcon
         centered={false}
-        trigger={<Button color="yellow">
-        <i aria-hidden="true" class="edit icon" ></i>
-          EDIT </Button>}
       >
         <Modal.Header>Edit Customer</Modal.Header>
         <Modal.Content>
@@ -72,12 +71,14 @@ export default class EditCustomer extends Component{
                 <Form.Field >
                   <Form.Input
                     label='Name'
+                    required
                     onChange={this.handleChangeName}
                     defaultValue={this.props.customer.name}
                     
                   />
                   <Form.Input
                     label='Address'
+                    required
                     onChange={this.handleChangeAddress}
                     defaultValue={this.props.customer.address}
                   />

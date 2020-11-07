@@ -30,14 +30,12 @@ export default class DeleteProduct extends Component{
     
     event.preventDefault()
 
-    axios.delete('https://localhost:44376/Product/DeleteProduct/'+this.props.proid
-      )
-      .then(prediction=>{
-        console.log(prediction);
-      })
+    axios.delete('https://localhost:44376/Products/DeleteProduct/'+this.props.proid)
+    .then(prediction=>{
+      console.log(prediction);
       this.props.products();
-      this.setState({modalOpen:false});
-    
+    })
+    this.setState({modalOpen:false});  
   }
 
   render() {
@@ -46,15 +44,14 @@ export default class DeleteProduct extends Component{
 
     return (
       <div>
+      <Button color="red" onClick={ (e) => this.setState({modalOpen: true})}>
+          <i aria-hidden="true" class="delete icon"></i>
+          DELETE</Button>
       <Modal
         open={this.state.modalOpen}
         onClose={this.handleClose}
         closeIcon
         centered={false}
-        trigger={<Button 
-          color="red">
-          <i aria-hidden="true" class="delete icon"></i>
-          DELETE</Button>}
       >
         <Modal.Header>Delete Product</Modal.Header>
         <Modal.Content>

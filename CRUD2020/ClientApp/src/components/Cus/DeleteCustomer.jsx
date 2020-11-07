@@ -32,11 +32,11 @@ export default class DeleteCustomer extends Component{
     event.preventDefault()
 
     console.log(this.state)
-    axios.delete('Customers/DeleteCustomer/' + this.props.cusid);
-    // .then(prediction=>{
-    //   console.log(prediction);
-    //   this.props.customers();
-    // })
+    axios.delete('Customers/DeleteCustomer/' + this.props.cusid)
+    .then(prediction=>{
+      console.log(prediction);
+      this.props.customers();
+    })
     this.setState({modalOpen:false});
     
   }
@@ -48,15 +48,14 @@ export default class DeleteCustomer extends Component{
 
     return (
       <div>
+        <Button color="red" onClick={ (e) => this.setState({modalOpen: true})}>
+          <i aria-hidden="true" class="delete icon"></i>
+          DELETE</Button>
       <Modal
         open={this.state.modalOpen}
         onClose={this.handleClose}
         closeIcon
         centered={false}
-        trigger={<Button 
-          color="red">
-          <i aria-hidden="true" class="delete icon"></i>
-          DELETE</Button>}
       >
         <Modal.Header>Delete Customer</Modal.Header>
         <Modal.Content>

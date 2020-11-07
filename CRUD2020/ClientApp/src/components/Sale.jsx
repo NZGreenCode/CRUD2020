@@ -5,6 +5,8 @@ import { Button, Modal } from 'semantic-ui-react'
 import AddSale from './Sal/AddSale'
 import EditSale from './Sal/EditSale'
 import DeleteSale from './Sal/DeleteSale'
+import  Pagination  from './Pagination'
+import { Customer } from './Customer'
 
 
 export class Sale extends Component {
@@ -31,11 +33,11 @@ export class Sale extends Component {
         .then( (res)=> {
           console.log(res.data);
           this.setState({sales:res.data})
+          console.log(">>"+this.state)
         })
         .catch((err)=> {
           console.log(err);
         });
-    
   }
 
   render () {
@@ -44,7 +46,7 @@ export class Sale extends Component {
   return (
   
 <div>
-    <AddSale  Sales={this.getAllSales}/>
+    <AddSale  sales={this.getAllSales}/>
    
     <br/>
     <br/>
@@ -65,10 +67,9 @@ export class Sale extends Component {
         {sales.map((sal)=>{
           return(
               <tr key={sal.id} >
-                <th >{sal.Customer.Name}</th>
-                <th>{sal.Product.Name}</th>
-                <th>{sal.Store.Name}</th>
-                <th>{sal.DateSold}</th>
+                <th >{sal.id}</th>
+                <th></th>
+                <th>{sal.dateSold}</th>
                 <th>
                   <EditSale sale={sal} sales={this.getAllSales}/>
                 </th>

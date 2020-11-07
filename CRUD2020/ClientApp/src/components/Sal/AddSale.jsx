@@ -14,12 +14,11 @@ export default class AddSale extends Component{
       customer:[],
       product:[],
       store:[],
-      Id:'',
-      ProductId:'',
-      CustomerId:'',
-      StoreId:'',
-      DateSold:'',
-      optionsCus:[]
+      // Id:'',
+      // ProductId:'',
+      // CustomerId:'',
+      // StoreId:'',
+      // DateSold:'',
     }
 
 }
@@ -30,15 +29,16 @@ export default class AddSale extends Component{
   handleClose=()=> this.setState({modalOpen:false});
   
   handleChangeCusDrop = event => {
-    this.setState({CustomerId:event.target.value})
-      }
+    this.setState({CustomerID:event.target.value})
     
+    }
     handleChangeProDrop = event => {
-      this.setState({ProductId:event.target.value})
-      }
+      console.log(">>>>>>>>>", event.target.value);
+      this.setState({ProductID:event.target.value})
+    }
     
     handleChangeStoDrop = event => {
-        this.setState({StoreId:event.target.value})
+        this.setState({StoreID:event.target.value})
       }
     
     handleChangeDate = event => {
@@ -49,14 +49,15 @@ export default class AddSale extends Component{
     handleSubmit=event=>{
       
       event.preventDefault()
-    
-          console.log(this.state)
-    
-      axios.post('https://localhost:44376/Sales/PostSale/',
+      console.log(event);
+
+          console.log("State >>>", this.state);
+
+          axios.post('https://localhost:44376/Sales/PostSales/',
       JSON.stringify({
-      ProductId:this.state.ProductId,
-      CustomerId:this.state.CustomerId,
-      StoreId:this.state.StoreId,
+      ProductId:this.state.ProductID,
+      CustomerId:this.state.CustomerID,
+      StoreId:this.state.StoreID,
       DateSold:this.state.Date,
     
       }),
@@ -87,6 +88,7 @@ export default class AddSale extends Component{
     });
     
   }
+  
 
   getAllProduct=()=>{
     
@@ -95,6 +97,7 @@ export default class AddSale extends Component{
     .then( (res)=> {
       // console.log(res.data);
       this.setState({product:res.data})
+      this.props.sales();
     })
     .catch((err)=> {
       console.log(err);
@@ -113,36 +116,24 @@ export default class AddSale extends Component{
           .catch((err)=> {
             console.log(err);
           });
-      
-    }
-
-
-
+  }
 
   render() {
 
     const {customer}=this.state;
     const {product}=this.state;
     const {store}=this.state;
-
-    const optionsCus=[
-      
-      customer.map((cusOp)=>{
-      return(`{ key: ${cusOp.Id}, value: ${cusOp.Id}, flag: ${cusOp.Id}, text: ${cusOp.name}},`)
-    })];
-
-    const defaultOption = optionsCus[0];
-
-
+// console.log('what is ur'+this.props.sales.Id);
 
     return (
       <div>
+        <Button primary onClick={ (e) => this.setState({modalOpen: true})}>New Sale</Button>
       <Modal
         open={this.state.modalOpen}
         onClose={this.handleClose}
         closeIcon
         centered={false}
-        trigger={<Button primary>New Sale</Button>}
+        id="sales_model"
       >
         <Modal.Header>Create Sale</Modal.Header>
         <Modal.Content>
@@ -154,39 +145,49 @@ export default class AddSale extends Component{
             <input
             type='date'
             name='dateSold'
+            required
             pladeholder='date sold'
             onChange={this.handleChangeDate}
             />
             <br/>
             <br/>      
             Customer
-            
-            <Dropdown 
-            options={optionsCus} 
-            fluid
-            search
-            selection           
-             placeholder="Customer"            
-            onChange={this.handleChangeCusDrop}/> 
+            <select 
+                value={this.state.CustomerId}
+                onChange={this.handleChangeCusDrop} >
+              {customer.map((cusOp)=>(
+                <option 
+                key={cusOp.id}
+                value={cusOp.id}
+                >{cusOp.name}</option>
+              )
+              )};
+            </select>
             <br/>
             <br/>
-              <Dropdown
-              placeholder='product'
-              selection
-              search
-              options={product}
-              onChange={this.handleChangeProDrop}
-              />
+            Product
+            <select onChange={this.handleChangeProDrop}
+>
+              {product.map((proOp)=>(
+                <option 
+                key={proOp.id} 
+                value={proOp.id}
+                >{proOp.name}</option>
+              )
+              )};
+            </select>
              <br/>
              <br/>
              Store
-             <Dropdown
-              placeholder='store'
-              selection
-              search
-              options={store}
-              onChange={this.handleStoDropdown}
-              />             
+            <select  onChange={this.handleChangeStoDrop}>
+              {store.map((stoOp)=>(
+                <option 
+                key={stoOp.id} 
+                value={stoOp.id}
+                >{stoOp.name}</option>
+              )
+              )};
+            </select>
               <br/>
               <br/>
             <Form.Field >
