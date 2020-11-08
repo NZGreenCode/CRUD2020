@@ -33,7 +33,6 @@ export default class AddSale extends Component{
     
     }
     handleChangeProDrop = event => {
-      console.log(">>>>>>>>>", event.target.value);
       this.setState({ProductID:event.target.value})
     }
     
@@ -153,7 +152,7 @@ export default class AddSale extends Component{
             <br/>      
             Customer
             <select 
-                value={this.state.CustomerId}
+                required
                 onChange={this.handleChangeCusDrop} >
               {customer.map((cusOp)=>(
                 <option 
@@ -166,12 +165,14 @@ export default class AddSale extends Component{
             <br/>
             <br/>
             Product
-            <select onChange={this.handleChangeProDrop}
->
+            <select 
+                onChange={this.handleChangeProDrop}
+              >
               {product.map((proOp)=>(
                 <option 
                 key={proOp.id} 
                 value={proOp.id}
+                selected={proOp.id[0]}
                 >{proOp.name}</option>
               )
               )};
@@ -179,14 +180,16 @@ export default class AddSale extends Component{
              <br/>
              <br/>
              Store
-            <select  onChange={this.handleChangeStoDrop}>
-              {store.map((stoOp)=>(
-                <option 
-                key={stoOp.id} 
-                value={stoOp.id}
-                >{stoOp.name}</option>
-              )
-              )};
+            <select 
+              required
+              onChange={this.handleChangeStoDrop}>
+                {store.map((stoOp)=>(
+                  <option 
+                  key={stoOp.id} 
+                  value={stoOp.id}
+                  >{stoOp.name}</option>
+                )
+                )};
             </select>
               <br/>
               <br/>

@@ -27,21 +27,22 @@ export class Sale extends Component {
     
 
   getAllSales=()=>{
-
-    // Make a request for a user with a given ID
+// Get whole Sales table
         axios.get(`https://localhost:44376/Sales/GetSales`)
         .then( (res)=> {
           console.log(res.data);
           this.setState({sales:res.data})
-          console.log(">>"+this.state)
+          // console.log(">>"+this.state)
+            //  console.log(this.state.sales.id);
         })
         .catch((err)=> {
-          console.log(err);
+          console.log(err); 
         });
   }
 
   render () {
     const {sales}=this.state;
+ 
 
   return (
   
@@ -67,8 +68,9 @@ export class Sale extends Component {
         {sales.map((sal)=>{
           return(
               <tr key={sal.id} >
-                <th >{sal.id}</th>
-                <th></th>
+                <th>{sal.customer.name}</th>
+                <th>{sal.product.name}</th>
+                <th>{sal.store.name}</th>
                 <th>{sal.dateSold}</th>
                 <th>
                   <EditSale sale={sal} sales={this.getAllSales}/>

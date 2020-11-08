@@ -146,13 +146,13 @@ export default class EditSalModal extends Component{
             <br/>      
             <label>Customer</label> 
             <select 
-            defaultValue={this.props.sale.customer}
+                onChange={this.handleChangeCusDrop}
+                defaultvalue={this.props.sale.customer.name}
             >
               {customer.map((cusOp)=>(
                 <option 
-                key={cusOp.Id} 
-                value={cusOp.name} 
-                onChange={this.handleChangeCusDrop}
+                key={cusOp.id} 
+                value={cusOp.id} 
                 >{cusOp.name}</option>
               )
               )};
@@ -160,15 +160,14 @@ export default class EditSalModal extends Component{
             <br/>
             <br/>
             <label>Product</label> 
-            <select 
-            defaultValue={this.props.sale.product}
+            <select                
+                onChange={this.handleChangeProDrop}
+                defaultvalue={this.props.sale.product.name}
             >
               {product.map((proOp)=>(
                 <option 
-                key={proOp.Id} 
-                value={proOp.name}
-                onChange={this.handleChangeProDrop}
-                
+                key={proOp.id} 
+                value={proOp.id}
                 >{proOp.name}</option>
               )
               )};
@@ -176,13 +175,14 @@ export default class EditSalModal extends Component{
              <br/>
              <br/>
              Store
-            <select>
+            <select
+                onChange={this.handleChangeStoDrop}
+                defaultvalue={this.props.sale.store.name}
+            >
               {store.map((stoOp)=>(
                 <option 
-                key={stoOp.Id} 
-                value={stoOp.name}
-                onChange={this.handleChangeStoDrop}
-                deafaultvalue={this.props.sale.store}
+                key={stoOp.id} 
+                value={stoOp.id}
                 >{stoOp.name}</option>
               )
               )};
