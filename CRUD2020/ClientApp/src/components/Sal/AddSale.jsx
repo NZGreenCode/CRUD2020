@@ -117,7 +117,34 @@ export default class AddSale extends Component{
           });
   }
 
+
+
+
+   // validation
+    validateForm() {
+        let formIsValid = true
+        if (!this.state.CustomerID) {
+            formIsValid = false;
+        }
+
+        if (!this.state.ProductID) {
+            formIsValid = false;
+        }
+
+        if (!this.state.StoreID) {
+            formIsValid = false;
+        }
+
+        if (!this.state.Date) {
+            formIsValid = false;
+        }
+
+        return formIsValid
+    }
+
+
   render() {
+
 
     const {customer}=this.state;
     const {product}=this.state;
@@ -139,7 +166,7 @@ export default class AddSale extends Component{
          
         <div class='ui container'>
         <Form onSubmit={this.handleSubmit}>
-            Date Sold 
+            <label>Date Sold </label>
             <br/>
             <input
             type='date'
@@ -149,10 +176,10 @@ export default class AddSale extends Component{
             onChange={this.handleChangeDate}
             />
             <br/>
-            <br/>      
-            Customer
+            <br/>  
+            <label>Customer</label>
             <select 
-                required
+                required                
                 onChange={this.handleChangeCusDrop} >
               {customer.map((cusOp)=>(
                 <option 
@@ -164,8 +191,9 @@ export default class AddSale extends Component{
             </select>
             <br/>
             <br/>
-            Product
+            <label>Product</label>
             <select 
+                required
                 onChange={this.handleChangeProDrop}
               >
               {product.map((proOp)=>(
@@ -179,7 +207,7 @@ export default class AddSale extends Component{
             </select>
              <br/>
              <br/>
-             Store
+             <label> Store</label>
             <select 
               required
               onChange={this.handleChangeStoDrop}>
@@ -198,7 +226,7 @@ export default class AddSale extends Component{
               <Button secondary onClick={this.handleClose}>
                   Cancel
               </Button>
-              <Button type='submit' color='green' >
+              <Button disabled={!this.validateForm()} type='submit' color='green' >
                   Create <Icon name='checkmark'/>
               </Button>
             </Form.Field>

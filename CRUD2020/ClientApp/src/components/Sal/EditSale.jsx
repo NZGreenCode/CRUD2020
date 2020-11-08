@@ -22,20 +22,21 @@ export default class EditSalModal extends Component{
     handleOpen=() => this.setState({modalOpen:true});
     handleClose=()=> this.setState({modalOpen:false}); 
 
-  handleChangeCusDrop = event => {
-    this.setState({CustomerId:event.target.value})
-      }
+  // handleChangeCusDrop = event => {
+  //   this.setState({CustomerId:event.target.value})
+  //     }
     
-    handleChangeProDrop = event => {
-      this.setState({ProductId:event.target.value})
-      }
+  //   handleChangeProDrop = event => {
+  //     this.setState({ProductId:event.target.value})
+  //     }
     
-    handleChangeStoDrop = event => {
-        this.setState({StoreId:event.target.value})
-      }
+  //   handleChangeStoDrop = event => {
+  //       this.setState({StoreId:event.target.value})
+  //     }
     
     handleChangeDate = event => {
       this.setState({Date:event.target.value})
+      console.log(this.Date);
     }
 
     handleSubmit=event=>{
@@ -45,9 +46,9 @@ export default class EditSalModal extends Component{
       axios.put('https://localhost:44376/Sales/PutSales/'+this.props.sale.id,
       JSON.stringify({
         Id:this.props.sale.id,
-        ProductId:this.state.ProductId,
-        CustomerId:this.state.CustomerId,
-        StoreId:this.state.StoreId,
+        ProductId:this.props.sale.product.name,
+        CustomerId:this.props.sale.customer.name,
+        StoreId:this.props.sale.store.name,
         DateSold:this.state.Date,
       }),
       { headers: {'Content-Type': 'application/json','Accept': 'application/json'}})
@@ -140,52 +141,34 @@ export default class EditSalModal extends Component{
             name='dateSold'
             required
             onChange={this.handleChangeDate}
-            defaultValue={this.props.sale.datesold}
+            value={this.props.sale.datesold}
             />
             <br/>
             <br/>      
             <label>Customer</label> 
-            <select 
-                onChange={this.handleChangeCusDrop}
-                defaultvalue={this.props.sale.customer.name}
-            >
-              {customer.map((cusOp)=>(
+            <select disabled>
                 <option 
-                key={cusOp.id} 
-                value={cusOp.id} 
-                >{cusOp.name}</option>
-              )
-              )};
+                value={this.props.sale.customer.name}
+                >{this.props.sale.customer.name}
+                </option>
             </select>
             <br/>
             <br/>
             <label>Product</label> 
-            <select                
-                onChange={this.handleChangeProDrop}
-                defaultvalue={this.props.sale.product.name}
-            >
-              {product.map((proOp)=>(
+            <select disabled>
                 <option 
-                key={proOp.id} 
-                value={proOp.id}
-                >{proOp.name}</option>
-              )
-              )};
+                value={this.props.sale.product.name}
+                >{this.props.sale.product.name}
+                </option>
             </select>
              <br/>
              <br/>
              Store
-            <select
-                onChange={this.handleChangeStoDrop}
-                defaultvalue={this.props.sale.store.name}
-            >
-              {store.map((stoOp)=>(
+            <select disabled>
                 <option 
-                key={stoOp.id} 
-                value={stoOp.id}
-                >{stoOp.name}</option>
-              )
-              )};
+                value={this.props.sale.store.name}
+                >{this.props.sale.store.name}
+                </option>
             </select>
                 <Form.Field >
                   <br/>
