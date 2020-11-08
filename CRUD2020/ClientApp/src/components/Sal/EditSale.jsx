@@ -36,19 +36,21 @@ export default class EditSalModal extends Component{
     
     handleChangeDate = event => {
       this.setState({Date:event.target.value})
-      console.log(this.Date);
+      console.log(event.target.value);
     }
-
     handleSubmit=event=>{
-      
+          console.log('<<<'+this.props.sale.product.name);
+          console.log('<<<'+this.props.sale.customer.name);
+          console.log('<<<'+this.props.sale.store.name);
+          console.log('<<<'+this.state.Date);
       event.preventDefault()
 
       axios.put('https://localhost:44376/Sales/PutSales/'+this.props.sale.id,
       JSON.stringify({
         Id:this.props.sale.id,
-        ProductId:this.props.sale.product.name,
-        CustomerId:this.props.sale.customer.name,
-        StoreId:this.props.sale.store.name,
+        ProductId:this.props.sale.product.id,
+        CustomerId:this.props.sale.customer.id,
+        StoreId:this.props.sale.store.id,
         DateSold:this.state.Date,
       }),
       { headers: {'Content-Type': 'application/json','Accept': 'application/json'}})
@@ -115,6 +117,10 @@ export default class EditSalModal extends Component{
     const {customer}=this.state;
     const {product}=this.state;
     const {store}=this.state;
+    var date = new DateObject();
+    date.setFormat("YYYY/MM/DD HH:mm:ss").parse(this.props.sale.dateSold);
+    date.format("DD-MM-YYYY"); 
+    console.log('<<>>'+ date);
 
 
     return (
@@ -141,7 +147,7 @@ export default class EditSalModal extends Component{
             name='dateSold'
             required
             onChange={this.handleChangeDate}
-            value={this.props.sale.datesold}
+            selected={this.props.sale.dateSold}
             />
             <br/>
             <br/>      
