@@ -2,13 +2,16 @@ import React,{Component} from 'react'
 import { Form,Icon,Header,Button,Modal } from 'semantic-ui-react'
 import axios from 'axios'
 import 'react-dropdown/style.css'
+import moment, { parseTwoDigitYear } from 'moment'
+import DatePicker from 'react-semantic-ui-datepickers';
 
 export default class EditSalModal extends Component{
   constructor(props){
 
     super(props)
     this.state={
-      
+      DateSold:'', 
+      dateTime1:'',     
 
       customer:[],
       product:[],
@@ -37,13 +40,9 @@ export default class EditSalModal extends Component{
     
     handleChangeDate = event => {
       this.setState({Date:event.target.value})
-      console.log(event.target.value);
+      console.log('<<>>'+event.target.value);
     }
     handleSubmit=event=>{
-          console.log('<<<'+this.props.sale.product.name);
-          console.log('<<<'+this.props.sale.customer.name);
-          console.log('<<<'+this.props.sale.store.name);
-          console.log('<<<'+this.state.Date);
       event.preventDefault()
 
       axios.put('https://localhost:44376/Sales/PutSales/'+this.props.sale.id,
@@ -118,11 +117,14 @@ export default class EditSalModal extends Component{
     const {customer}=this.state;
     const {product}=this.state;
     const {store}=this.state;
-    // date.setFormat("YYYY/MM/DD HH:mm:ss").parse(this.props.sale.dateSold);
-    // date.format("DD-MM-YYYY"); 
-    // console.log('<<>>'+ date);
+    // this.state.DateSold= moment(new Date(this.props.sales.dateSold)).format(YYYY-MM-DD);
+const format1 = "YYYY-MM-DD HH:mm:ss"
+const format2 = "YYYY-MM-DD"
+var date1 = new Date(this.props.sales.dateSold);
 
+var dateTime1 = moment(date1).format(format2);
 
+    console.log('day'+dateTime1);
     return (
       <div>
       <Button color="yellow" onClick={ (e) => this.setState({modalOpen: true})}>
@@ -140,16 +142,21 @@ export default class EditSalModal extends Component{
 
         <div class='ui container'>
             <Form onSubmit={this.handleSubmit}>
-            <label>Date Sold</label> 
+            <label>Date Sold</label><br/>
+            <label>{this.props.sale.dateSold}</label>
             <br/>
             <input
             type='date'
             name='dateSold'
             required
-            // value={this.props.sale.dateSold}
+            defaultvalue={"2020-11-07"}
             onChange={this.handleChangeDate}
-            // selected={this.props.sale.dateSold}
             />
+{/* <DatePicker
+  selected={this.props.sale.DateSold}
+  onChange={this.handleChangeDate}
+  format={YYYY-MM-DDHH:MM:SS}
+/> */}
             <br/>
             <br/>      
             <label>Customer</label> 

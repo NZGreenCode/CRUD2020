@@ -1,7 +1,5 @@
 import React,{useState,Component } from 'react'
 import axios from "axios"
-import ReactDOM from 'react-dom'
-import { Pagination } from 'semantic-ui-react'
 import AddCustomer from './Cus/AddCustomer'
 import EditCustomer from './Cus/EditCustomer'
 import DeleteCustomer from './Cus/DeleteCustomer'
@@ -19,7 +17,7 @@ export class Customer extends Component {
      offset: 0,
      customers:[],
      tableData:[],
-     perPage:8,
+     perPage:7,
      currentPage:0
     };
     this.handlePageClick= this.handlePageClick.bind(this);

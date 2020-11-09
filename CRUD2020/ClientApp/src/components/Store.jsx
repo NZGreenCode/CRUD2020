@@ -1,7 +1,5 @@
 import React,{useState,Component } from 'react'
 import axios from "axios"
-import ReactDOM from 'react-dom'
-import { Button, Modal } from 'semantic-ui-react'
 import AddStore from './Sto/AddStore'
 import EditStore from './Sto/EditStore'
 import DeleteStore from './Sto/DeleteStore'
@@ -17,7 +15,7 @@ export class Store extends Component {
      offset: 0,
      tableData:[],
      stores:[],
-     perPage:8,
+     perPage:7,
      currentPage:0
     };
 

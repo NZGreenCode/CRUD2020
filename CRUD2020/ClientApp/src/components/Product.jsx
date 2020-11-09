@@ -1,7 +1,5 @@
 import React,{useState,Component } from 'react';
 import axios from "axios";
-import ReactDOM from 'react-dom';
-import { Button, Modal } from 'semantic-ui-react'
 import AddProduct from './Pro/AddProduct'
 import EditProduct from './Pro/EditProduct'
 import DeleteProduct from './Pro/DeleteProduct'
@@ -18,7 +16,7 @@ export class Product extends Component {
     offset: 0,
     products:[],
     tableData:[],
-    perPage:8,
+    perPage:7,
     currentPage:0
 
     }

@@ -1,11 +1,8 @@
 import React,{useState,Component } from 'react'
 import axios from "axios"
-import ReactDOM from 'react-dom'
-import { Button, Modal } from 'semantic-ui-react'
 import AddSale from './Sal/AddSale'
 import EditSale from './Sal/EditSale'
 import DeleteSale from './Sal/DeleteSale'
-import  Customer  from './Customer'
 import ReactPaginate from 'react-paginate'
 
 export class Sale extends Component {
@@ -18,7 +15,7 @@ export class Sale extends Component {
      sales:[],
      offset: 0,
      tableData:[],
-     perPage:8,
+     perPage:7,
      currentPage:0
     };
 
