@@ -5,7 +5,7 @@ import { Button, Modal } from 'semantic-ui-react'
 import AddProduct from './Pro/AddProduct'
 import EditProduct from './Pro/EditProduct'
 import DeleteProduct from './Pro/DeleteProduct'
-import  Pagination  from './Pagination'
+import ReactPaginate from 'react-paginate'
 
 
 export class Product extends Component {
@@ -15,9 +15,44 @@ export class Product extends Component {
    this.state = { 
 
     loading:true,
+    offset: 0,
     products:[],
+    tableData:[],
+    perPage:8,
+    currentPage:0
+
     }
+
+        this.handlePageClick= this.handlePageClick.bind(this);
+
   }
+
+    handlePageClick=(e)=> {
+    var selectedPage=e.selected;
+    var offset=selectedPage*this.state.perPage;
+
+    this.setState({
+      currentPage:selectedPage,
+      offset:offset
+    },  ()=>{
+          this.loadMoreData()
+    });
+  }
+    loadMoreData() {
+
+         var data=this.state.products;
+
+          var slice=data.slice(this.state.offset,this.state.offset + this.state.perPage)
+         
+          this.setState({
+            pageCount:Math.ceil(data.length/this.state.perPage),
+            tableData:slice
+          })
+
+    }
+
+
+
 
 
   componentDidMount(){
@@ -30,7 +65,19 @@ export class Product extends Component {
       // Make a request for a user with a given ID
       axios.get(`https://localhost:44376/Products/GetProduct`)
       .then((res)=> {
-        this.setState({products:res.data})
+
+          var data= res.data;
+          var slice= data.slice(this.state.offset,this.state.offset + this.state.perPage)
+         
+          this.setState({
+
+            pageCount:Math.ceil(data.length/this.state.perPage),
+            products:res.data,
+            tableData:slice
+          
+          })
+
+
       })
       .catch((err)=> {
         console.log(err);
@@ -58,7 +105,7 @@ export class Product extends Component {
         </tr>
       </thead>
       <tbody>
-          {products.map((pro)=>{
+          {this.state.tableData.map((pro)=>{
             return(
                 <tr key={pro.id}>
                   <th >{pro.name}</th>
@@ -76,6 +123,22 @@ export class Product extends Component {
           </tbody>
       
     </table>
+  <span>
+  <ReactPaginate
+    previousLabel={"prev"}
+    nextLabel={"next"}
+    breakLabel={"..."}
+    breakClassName={"break-me"}
+    marginPagesDisplayed={2}
+    pageRangeDisplayed={5}
+    onPageChange={this.handlePageClick}
+    containerClassName={"pagination"}
+    subContainerClassName={'pages pagination'}
+    activeClassName={"active"}
+    pageCount={this.state.pageCount}
+   />
+  </span>
+
       
 </div>
     )

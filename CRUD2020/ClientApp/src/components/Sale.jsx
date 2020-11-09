@@ -5,9 +5,8 @@ import { Button, Modal } from 'semantic-ui-react'
 import AddSale from './Sal/AddSale'
 import EditSale from './Sal/EditSale'
 import DeleteSale from './Sal/DeleteSale'
-import  Pagination  from './Pagination'
-import { Customer } from './Customer'
-
+import  Customer  from './Customer'
+import ReactPaginate from 'react-paginate'
 
 export class Sale extends Component {
   constructor(props) {
@@ -17,9 +16,40 @@ export class Sale extends Component {
 
      loading: true,
      sales:[],
+     offset: 0,
+     tableData:[],
+     perPage:8,
+     currentPage:0
     };
+
+    this.handlePageClick= this.handlePageClick.bind(this);
+
   }
 
+  handlePageClick=(e)=> {
+    var selectedPage=e.selected;
+    var offset=selectedPage*this.state.perPage;
+
+    this.setState({
+      currentPage:selectedPage,
+      offset:offset
+    },  ()=>{
+          this.loadMoreData()
+    });
+  }
+    loadMoreData() {
+
+         var data=this.state.sales;
+
+          var slice=data.slice(this.state.offset,this.state.offset + this.state.perPage)
+         
+          this.setState({
+            pageCount:Math.ceil(data.length/this.state.perPage),
+            tableData:slice
+          })
+
+    }
+  
 
  componentDidMount(){
   this.getAllSales();
@@ -31,9 +61,19 @@ export class Sale extends Component {
         axios.get(`https://localhost:44376/Sales/GetSales`)
         .then( (res)=> {
           console.log(res.data);
-          this.setState({sales:res.data})
-          // console.log(">>"+this.state)
-            //  console.log(this.state.sales.id);
+
+          var data=res.data;
+
+          var slice=data.slice(this.state.offset,this.state.offset + this.state.perPage)
+         
+          this.setState({
+
+            pageCount:Math.ceil(data.length/this.state.perPage),
+            sales:res.data,
+            tableData:slice
+          
+          })
+
         })
         .catch((err)=> {
           console.log(err); 
@@ -65,7 +105,7 @@ export class Sale extends Component {
         </tr>
     </thead>
     <tbody>
-        {sales.map((sal)=>{
+        {this.state.tableData.map((sal)=>{
           return(
               <tr key={sal.id} >
                 <th>{sal.customer.name}</th>
@@ -86,7 +126,21 @@ export class Sale extends Component {
     </tbody>
 
     </table>
-
+    <span>
+  <ReactPaginate
+    previousLabel={"prev"}
+    nextLabel={"next"}
+    breakLabel={"..."}
+    breakClassName={"break-me"}
+    marginPagesDisplayed={2}
+    pageRangeDisplayed={5}
+    onPageChange={this.handlePageClick}
+    containerClassName={"pagination"}
+    subContainerClassName={'pages pagination'}
+    activeClassName={"active"}
+    pageCount={this.state.pageCount}
+   />
+  </span>
 </div>
   );
 

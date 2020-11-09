@@ -7,8 +7,8 @@ export default class EditProduct extends Component{
 
         super(props)
         this.state={
-          
-
+              Name:this.props.product.name,
+              Price:this.props.product.price
         }
 
       }

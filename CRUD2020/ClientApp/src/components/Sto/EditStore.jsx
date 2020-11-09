@@ -11,8 +11,8 @@ export default class EditStore extends Component{
     this.state={
       
 
-    Name:'',
-    Address:'',
+    Name:this.props.store.name,
+    Address:this.props.store.address,
 
     }
 

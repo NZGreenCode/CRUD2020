@@ -5,7 +5,7 @@ import { Button, Modal } from 'semantic-ui-react'
 import AddStore from './Sto/AddStore'
 import EditStore from './Sto/EditStore'
 import DeleteStore from './Sto/DeleteStore'
-import  Pagination  from './Pagination'
+import ReactPaginate from 'react-paginate'
 
 
 export class Store extends Component {
@@ -13,16 +13,41 @@ export class Store extends Component {
   
    super(props);
    this.state = { 
-    // addModalShow: false,
-    // editModalShow:false,
-    // deleteModalShow:false,
-
      loading: true,
+     offset: 0,
+     tableData:[],
      stores:[],
+     perPage:8,
+     currentPage:0
     };
+
+    this.handlePageClick= this.handlePageClick.bind(this);
   }
 
+  handlePageClick=(e)=> {
+    var selectedPage=e.selected;
+    var offset=selectedPage*this.state.perPage;
 
+    this.setState({
+      currentPage:selectedPage,
+      offset:offset
+    },  ()=>{
+          this.loadMoreData()
+    });
+  }
+    loadMoreData() {
+
+         var data=this.state.stores;
+
+          var slice=data.slice(this.state.offset,this.state.offset + this.state.perPage)
+         
+          this.setState({
+            pageCount:Math.ceil(data.length/this.state.perPage),
+            tableData:slice
+          })
+
+    }
+  
  componentDidMount(){
   this.getAllStores();
  }
@@ -34,7 +59,17 @@ export class Store extends Component {
         axios.get(`Stores/GetStore`)
         .then( (res)=> {
           console.log(res.data);
-          this.setState({stores:res.data})
+
+          var data=res.data;
+
+          var slice=data.slice(this.state.offset,this.state.offset + this.state.perPage)
+         
+          this.setState({
+
+            pageCount:Math.ceil(data.length/this.state.perPage),
+            stores:res.data,          
+            tableData:slice
+          })
         })
         .catch((err)=> {
           console.log(err);
@@ -63,7 +98,7 @@ export class Store extends Component {
         </tr>
     </thead>
     <tbody>
-        {stores.map((sto)=>{
+        {this.state.tableData.map((sto)=>{
           return(
               <tr key={sto.id} >
                 <th >{sto.name}</th>
@@ -82,7 +117,21 @@ export class Store extends Component {
     </tbody>
 
     </table>
-
+    <span>
+  <ReactPaginate
+    previousLabel={"prev"}
+    nextLabel={"next"}
+    breakLabel={"..."}
+    breakClassName={"break-me"}
+    marginPagesDisplayed={2}
+    pageRangeDisplayed={5}
+    onPageChange={this.handlePageClick}
+    containerClassName={"pagination"}
+    subContainerClassName={'pages pagination'}
+    activeClassName={"active"}
+    pageCount={this.state.pageCount}
+   />
+  </span>
 </div>
   );
 

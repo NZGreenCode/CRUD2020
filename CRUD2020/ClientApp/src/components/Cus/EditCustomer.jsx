@@ -9,8 +9,8 @@ export default class EditCustomer extends Component{
     super(props)
     this.state={
 
-        name:this.props.customer.name,
-        address:this.props.customer.address
+        Name:this.props.customer.name,
+        Address:this.props.customer.address
        }
 
   }
@@ -51,7 +51,7 @@ export default class EditCustomer extends Component{
     }
 
   render() {
-
+      console.log(this.state.name);
     return (
       <div>
         <Button color="yellow" onClick={ (e) => this.setState({modalOpen: true})}>

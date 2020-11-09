@@ -1,11 +1,12 @@
 import React,{useState,Component } from 'react'
 import axios from "axios"
 import ReactDOM from 'react-dom'
-import { Button, Modal } from 'semantic-ui-react'
+import { Pagination } from 'semantic-ui-react'
 import AddCustomer from './Cus/AddCustomer'
 import EditCustomer from './Cus/EditCustomer'
 import DeleteCustomer from './Cus/DeleteCustomer'
-import  Pagination  from './Pagination'
+import ReactPaginate from 'react-paginate'
+
 
 
 export class Customer extends Component {
@@ -15,10 +16,40 @@ export class Customer extends Component {
    this.state = { 
 
      loading: true,
+     offset: 0,
      customers:[],
+     tableData:[],
+     perPage:8,
+     currentPage:0
     };
+    this.handlePageClick= this.handlePageClick.bind(this);
   }
+  handlePageClick=(e)=> {
+    var selectedPage=e.selected;
+    var offset=selectedPage*this.state.perPage;
 
+    this.setState({
+      currentPage:selectedPage,
+      offset:offset
+    },  ()=>{
+          this.loadMoreData()
+    });
+  }
+    loadMoreData() {
+
+         var data=this.state.customers;
+
+          var slice=data.slice(this.state.offset,this.state.offset + this.state.perPage)
+         
+          this.setState({
+            pageCount:Math.ceil(data.length/this.state.perPage),
+            tableData:slice
+          })
+
+    }
+
+
+  
 
  componentDidMount(){
   this.getAllCustomers();
@@ -31,7 +62,18 @@ export class Customer extends Component {
         axios.get(`Customers/GetCustomer`)
         .then( (res)=> {
           console.log(res.data);
-          this.setState({customers:res.data})
+         
+          var data=res.data;
+
+          var slice=data.slice(this.state.offset,this.state.offset + this.state.perPage)
+         
+          this.setState({
+
+            pageCount:Math.ceil(data.length/this.state.perPage),
+            customers:res.data,
+            tableData:slice
+          
+          })
         })
         .catch((err)=> {
           console.log(err);
@@ -43,7 +85,7 @@ export class Customer extends Component {
     const {customers}=this.state;
 
   return (
-  
+
 <div>
     <AddCustomer customers={this.getAllCustomers}/>
    
@@ -60,7 +102,7 @@ export class Customer extends Component {
         </tr>
     </thead>
     <tbody>
-        {customers.map((cust)=>{
+        {this.state.tableData.map((cust)=>{
           return(
               <tr key={cust.id} >
                 <th >{cust.name}</th>
@@ -79,8 +121,22 @@ export class Customer extends Component {
     </tbody>
 
     </table>
-
-</div>
+    <span>
+  <ReactPaginate
+    previousLabel={"prev"}
+    nextLabel={"next"}
+    breakLabel={"..."}
+    breakClassName={"break-me"}
+    marginPagesDisplayed={2}
+    pageRangeDisplayed={5}
+    onPageChange={this.handlePageClick}
+    containerClassName={"pagination"}
+    subContainerClassName={'pages pagination'}
+    activeClassName={"active"}
+    pageCount={this.state.pageCount}
+   />
+  </span>
+    </div>
   )
 
   }

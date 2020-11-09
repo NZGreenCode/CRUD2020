@@ -13,6 +13,7 @@ export default class EditSalModal extends Component{
       customer:[],
       product:[],
       store:[],
+      Date:this.props.sale.dateSold
     }
 
   }
@@ -117,10 +118,9 @@ export default class EditSalModal extends Component{
     const {customer}=this.state;
     const {product}=this.state;
     const {store}=this.state;
-    var date = new DateObject();
-    date.setFormat("YYYY/MM/DD HH:mm:ss").parse(this.props.sale.dateSold);
-    date.format("DD-MM-YYYY"); 
-    console.log('<<>>'+ date);
+    // date.setFormat("YYYY/MM/DD HH:mm:ss").parse(this.props.sale.dateSold);
+    // date.format("DD-MM-YYYY"); 
+    // console.log('<<>>'+ date);
 
 
     return (
@@ -146,8 +146,9 @@ export default class EditSalModal extends Component{
             type='date'
             name='dateSold'
             required
+            // value={this.props.sale.dateSold}
             onChange={this.handleChangeDate}
-            selected={this.props.sale.dateSold}
+            // selected={this.props.sale.dateSold}
             />
             <br/>
             <br/>      
