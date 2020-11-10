@@ -24,7 +24,7 @@ export default class DeleteSale extends Component{
     event.preventDefault()
 
     console.log(this.state);
-    axios.delete('https://localhost:44376/Sales/DeleteSales/' + this.props.salid)
+    axios.delete('Sales/DeleteSales/' + this.props.salid)
         // this.props.sales();
         // window.location.reload();
         this.props.sales();

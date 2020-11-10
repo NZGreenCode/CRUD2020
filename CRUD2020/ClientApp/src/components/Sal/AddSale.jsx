@@ -52,7 +52,7 @@ export default class AddSale extends Component{
 
           console.log("State >>>", this.state);
 
-          axios.post('https://localhost:44376/Sales/PostSales/',
+          axios.post('Sales/PostSales/',
       JSON.stringify({
       ProductId:this.state.ProductID,
       CustomerId:this.state.CustomerID,
@@ -77,7 +77,7 @@ export default class AddSale extends Component{
   getAllCustomer=()=>{
 
     // Make a request for a user with a given ID
-    axios.get(`https://localhost:44376/Customers/GetCustomer`)
+    axios.get(`Customers/GetCustomer`)
     .then( (res)=> {
       console.log(res.data);
       this.setState({customer:res.data})
@@ -92,7 +92,7 @@ export default class AddSale extends Component{
   getAllProduct=()=>{
     
     // Make a request for a user with a given ID
-    axios.get(`https://localhost:44376/Products/GetProduct`)
+    axios.get(`Products/GetProduct`)
     .then( (res)=> {
       // console.log(res.data);
       this.setState({product:res.data})

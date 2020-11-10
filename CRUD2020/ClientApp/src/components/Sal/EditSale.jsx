@@ -45,7 +45,7 @@ export default class EditSalModal extends Component{
     handleSubmit=event=>{
       event.preventDefault()
 
-      axios.put('https://localhost:44376/Sales/PutSales/'+this.props.sale.id,
+      axios.put('Sales/PutSales/'+this.props.sale.id,
       JSON.stringify({
         Id:this.props.sale.id,
         ProductId:this.props.sale.product.id,
@@ -70,7 +70,7 @@ export default class EditSalModal extends Component{
   getAllCustomer=()=>{
 
     // Make a request for a user with a given ID
-    axios.get(`https://localhost:44376/Customers/GetCustomer`)
+    axios.get(`Customers/GetCustomer`)
     .then( (res)=> {
       console.log(res.data);
       this.setState({customer:res.data})
@@ -86,7 +86,7 @@ export default class EditSalModal extends Component{
   getAllProduct=()=>{
     
     // Make a request for a user with a given ID
-    axios.get(`https://localhost:44376/Products/GetProduct`)
+    axios.get(`Products/GetProduct`)
     .then( (res)=> {
       // console.log(res.data);
       this.setState({product:res.data})

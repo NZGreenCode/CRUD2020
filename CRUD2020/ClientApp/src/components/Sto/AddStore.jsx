@@ -39,7 +39,7 @@ export default class AddStore extends Component{
     event.preventDefault()
   
     console.log(this.state)
-    axios.post('https://localhost:44376/Stores/PostStore/',
+    axios.post('Stores/PostStore/',
     JSON.stringify({
     Name:this.state.Name,
     Address:this.state.Address,

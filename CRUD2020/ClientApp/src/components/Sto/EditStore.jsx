@@ -39,7 +39,7 @@ export default class EditStore extends Component{
       
       event.preventDefault()
 
-      axios.put('https://localhost:44376/Stores/PutStore/'+ this.props.store.id,
+      axios.put('Stores/PutStore/'+ this.props.store.id,
       JSON.stringify({
         Id:this.props.store.id,
         Name:this.state.Name,
