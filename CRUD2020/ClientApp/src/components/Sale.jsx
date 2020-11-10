@@ -4,6 +4,7 @@ import AddSale from './Sal/AddSale'
 import EditSale from './Sal/EditSale'
 import DeleteSale from './Sal/DeleteSale'
 import ReactPaginate from 'react-paginate'
+import moment from 'moment'
 
 export class Sale extends Component {
   constructor(props) {
@@ -79,6 +80,7 @@ export class Sale extends Component {
 
   render () {
     const {sales}=this.state;
+    const m = moment();
  
 
   return (
@@ -108,7 +110,7 @@ export class Sale extends Component {
                 <th>{sal.customer.name}</th>
                 <th>{sal.product.name}</th>
                 <th>{sal.store.name}</th>
-                <th>{sal.dateSold}</th>
+                <th>{moment(sal.dateSold).format("DD-MM-YYYY")}</th>
                 <th>
                   <EditSale sale={sal} sales={this.getAllSales}/>
                 </th>

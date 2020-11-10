@@ -143,20 +143,15 @@ var dateTime1 = moment(date1).format(format2);
         <div class='ui container'>
             <Form onSubmit={this.handleSubmit}>
             <label>Date Sold</label><br/>
-            <label>{this.props.sale.dateSold}</label>
+            <label>{moment(this.props.sale.dateSold).format("DD-MM-YYYY")}</label>
             <br/>
             <input
             type='date'
             name='dateSold'
             required
-            defaultvalue={"2020-11-07"}
+            format={moment(this.props.sale.dateSold).format("DD-MM-YYYY")}
             onChange={this.handleChangeDate}
             />
-{/* <DatePicker
-  selected={this.props.sale.DateSold}
-  onChange={this.handleChangeDate}
-  format={YYYY-MM-DDHH:MM:SS}
-/> */}
             <br/>
             <br/>      
             <label>Customer</label> 
