@@ -56,7 +56,7 @@ export class Sale extends Component {
 
   getAllSales=()=>{
 // Get whole Sales table
-        axios.get(`https://localhost:44376/Sales/GetSales`)
+        axios.get(`Sales/GetSales`)
         .then( (res)=> {
           console.log(res.data);
 
