@@ -2,6 +2,7 @@ import React,{Component} from 'react'
 import { Form,Icon,Header,Button,Modal,Dropdown  } from 'semantic-ui-react'
 import axios from 'axios'
 import 'react-dropdown/style.css';
+import moment from 'moment'
 
 
 export default class AddSale extends Component{
@@ -29,7 +30,9 @@ export default class AddSale extends Component{
   handleClose=()=> this.setState({modalOpen:false});
   
   handleChangeCusDrop = event => {
-    this.setState({CustomerID:event.target.value})
+      this.setState({ CustomerID: event.target.value })
+      console.log('<<>>' + event.target.value);
+
     
     }
     handleChangeProDrop = event => {
@@ -41,7 +44,9 @@ export default class AddSale extends Component{
       }
     
     handleChangeDate = event => {
-      this.setState({Date:event.target.value})
+        this.setState({
+            Date:moment(event.target.value).format("DD-MM-YYYY")
+        })
     }
           
     
@@ -184,7 +189,7 @@ export default class AddSale extends Component{
               {customer.map((cusOp)=>(
                 <option 
                 key={cusOp.id}
-                value={cusOp.id}
+                value={cusOp.name}
                 >{cusOp.name}</option>
               )
               )};
@@ -199,8 +204,7 @@ export default class AddSale extends Component{
               {product.map((proOp)=>(
                 <option 
                 key={proOp.id} 
-                value={proOp.id}
-                selected={proOp.id[0]}
+                value={proOp.name}
                 >{proOp.name}</option>
               )
               )};
@@ -214,7 +218,7 @@ export default class AddSale extends Component{
                 {store.map((stoOp)=>(
                   <option 
                   key={stoOp.id} 
-                  value={stoOp.id}
+                  value={stoOp.name}
                   >{stoOp.name}</option>
                 )
                 )};

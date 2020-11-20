@@ -37,7 +37,7 @@ export default class AddProduct extends Component{
     
     event.preventDefault()
   
-    console.log(this.state)
+    console.log(this.state.Price)
     axios.post('Products/PostProduct/',
     JSON.stringify({
     Name:this.state.Name,
