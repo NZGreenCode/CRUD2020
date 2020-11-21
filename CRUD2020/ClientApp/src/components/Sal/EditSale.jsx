@@ -5,6 +5,7 @@ import 'react-dropdown/style.css'
 import moment, { parseTwoDigitYear } from 'moment'
 import DatePicker from 'react-semantic-ui-datepickers';
 import { Dropdown } from 'semantic-ui-react'
+import { when } from 'jquery'
 
 
 export default class EditSalModal extends Component{
@@ -18,9 +19,9 @@ export default class EditSalModal extends Component{
       customer:[],
       product:[],
         store: [],
-        CustomerId: this.props.sale.customer.id,
-        ProductId: this.props.sale.product.id,
-        StoreId: this.props.sale.store.id,
+        CustomerName: this.props.sale.customer.id,
+        ProductName: this.props.sale.product.id,
+        StoreName: this.props.sale.store.id,
         Date:moment(this.props.sale.dateSold).format("DD-MM-YYYY")
 
       
@@ -34,19 +35,20 @@ export default class EditSalModal extends Component{
     handleClose=()=> this.setState({modalOpen:false}); 
 
     handleChangeCusDrop = event => {
-        this.setState({ CustomerId: event.target.value })
-        console.log('<<>>' + event.target.value);
+        this.setState({ CustomerName: event.target.value })
+        console.log('<<>>' + event.target.Id);
+        this.getAllCustomer();
 
        }
     
     handleChangeProDrop = event => {
-        this.setState({ ProductId: event.target.value })
-        console.log('<<>>' + event.target.value);
+        this.setState({ ProductName: event.target.value })
+        console.log('<<>>' + event.target.Id);
 
        }
     
     handleChangeStoDrop = event => {
-        this.setState({ StoreId: event.target.value })
+        this.setState({ StoreName: event.target.value })
         console.log('<<>>' + event.target.value);
 
        }
@@ -61,10 +63,10 @@ export default class EditSalModal extends Component{
       axios.put('Sales/PutSales/'+this.props.sale.id,
       JSON.stringify({
         Id:this.props.sale.id,
-        ProductId: this.state.ProductId,
-        CustomerId: this.state.CustomerId,
-        StoreId: this.state.StoreId,
-        DateSold: this.state.Date,
+        Product:{name:this.state.ProductName},
+        Customer:{name:this.state.CustomerName},
+        Store:{name:this.state.StoreName},
+        DateSold: this.state.Date
 
       }),
       { headers: {'Content-Type': 'application/json','Accept': 'application/json'}})
@@ -132,7 +134,7 @@ export default class EditSalModal extends Component{
     const {product}=this.state;
     const { store } = this.state;
 
-
+    
 
     // this.state.DateSold= moment(new Date(this.props.sales.dateSold)).format(YYYY-MM-DD);
 
@@ -174,6 +176,7 @@ export default class EditSalModal extends Component{
                 {customer.map((cusOp) => (
                     <option
                         key={cusOp.id}
+                        Id={cusOp.id}
                         value={cusOp.name}
                     >{cusOp.name}</option>
                 )
@@ -207,6 +210,7 @@ export default class EditSalModal extends Component{
                     <option
                         key={stoOp.id}
                         value={stoOp.name}
+                        text={stoOp.id}
                     >{stoOp.name}</option>
                 )
                 )};

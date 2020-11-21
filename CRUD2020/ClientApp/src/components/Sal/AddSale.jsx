@@ -193,7 +193,7 @@ export default class AddSale extends Component{
               {customer.map((cusOp)=>(
                 <option 
                 key={cusOp.id}
-                value={cusOp.name}
+                value={cusOp.id}
                 >{cusOp.name}</option>
               )
               )};
@@ -208,7 +208,7 @@ export default class AddSale extends Component{
               {product.map((proOp)=>(
                 <option 
                 key={proOp.id} 
-                value={proOp.name}
+                value={proOp.id}
                 >{proOp.name}</option>
               )
               )};
@@ -222,7 +222,7 @@ export default class AddSale extends Component{
                 {store.map((stoOp)=>(
                   <option 
                   key={stoOp.id} 
-                  value={stoOp.name}
+                  value={stoOp.id}
                   >{stoOp.name}</option>
                 )
                 )};
