@@ -19,12 +19,10 @@ export default class EditSalModal extends Component{
       customer:[],
       product:[],
         store: [],
-        CustomerName: this.props.sale.customer.id,
-        ProductName: this.props.sale.product.id,
-        StoreName: this.props.sale.store.id,
+        CustomerId: this.props.sale.customer.id,
+        ProductId: this.props.sale.product.id,
+        StoreId: this.props.sale.store.id,
         Date:moment(this.props.sale.dateSold).format("DD-MM-YYYY")
-
-      
     }
 
   }
@@ -35,20 +33,20 @@ export default class EditSalModal extends Component{
     handleClose=()=> this.setState({modalOpen:false}); 
 
     handleChangeCusDrop = event => {
-        this.setState({ CustomerName: event.target.value })
-        console.log('<<>>' + event.target.Id);
+        this.setState({ CustomerId: event.target.value })
+        console.log('<<>>' + event.target.value);
         this.getAllCustomer();
 
        }
     
     handleChangeProDrop = event => {
-        this.setState({ ProductName: event.target.value })
-        console.log('<<>>' + event.target.Id);
+        this.setState({ ProductId: event.target.value })
+        console.log('<<>>' + event.target.value);
 
        }
     
     handleChangeStoDrop = event => {
-        this.setState({ StoreName: event.target.value })
+        this.setState({ StoreId: event.target.value })
         console.log('<<>>' + event.target.value);
 
        }
@@ -63,9 +61,9 @@ export default class EditSalModal extends Component{
       axios.put('Sales/PutSales/'+this.props.sale.id,
       JSON.stringify({
         Id:this.props.sale.id,
-        Product:{name:this.state.ProductName},
-        Customer:{name:this.state.CustomerName},
-        Store:{name:this.state.StoreName},
+        ProductId:this.state.ProductId,
+        CustomerId:this.state.CustomerId,
+        StoreId:this.state.StoreId,
         DateSold: this.state.Date
 
       }),
@@ -171,13 +169,12 @@ export default class EditSalModal extends Component{
             <label>Customer</label> 
             <select
                 onChange={this.handleChangeCusDrop}
-                defaultValue={this.props.sale.customer.name}
+                defaultValue={this.props.sale.customer.id}
             >
                 {customer.map((cusOp) => (
                     <option
                         key={cusOp.id}
-                        Id={cusOp.id}
-                        value={cusOp.name}
+                        value={cusOp.id}
                     >{cusOp.name}</option>
                 )
                 )};
@@ -187,12 +184,12 @@ export default class EditSalModal extends Component{
             <label>Product</label> 
             <select
                 onChange={this.handleChangeProDrop}
-                defaultValue={this.props.sale.product.name}
+                defaultValue={this.props.sale.product.id}
             >
                 {product.map((proOp) => (
                     <option
                         key={proOp.id}
-                        value={proOp.name}
+                        value={proOp.id}
                     >{proOp.name}</option>
                 )
                 )};
@@ -204,13 +201,12 @@ export default class EditSalModal extends Component{
 
             <select
                 onChange={this.handleChangeStoDrop}
-                defaultValue={this.props.sale.store.name}
+                defaultValue={this.props.sale.store.id}
             >
                 {store.map((stoOp) => (
                     <option
                         key={stoOp.id}
-                        value={stoOp.name}
-                        text={stoOp.id}
+                        value={stoOp.id}
                     >{stoOp.name}</option>
                 )
                 )};
