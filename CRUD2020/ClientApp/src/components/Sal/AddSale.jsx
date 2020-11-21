@@ -67,10 +67,14 @@ export default class AddSale extends Component{
       }),
       { headers: {'Content-Type': 'application/json','Accept': 'application/json'}})
         .then(prediction=>{
-          console.log(prediction);
+          console.log('what'+prediction);
           this.props.sales();
         })
         this.setState({modalOpen:false});
+        this.state.CustomerID='';
+        this.state.ProductID='';
+        this.state.StoreID='';
+
     
       }
   componentDidMount(){

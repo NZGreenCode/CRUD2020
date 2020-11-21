@@ -21,7 +21,8 @@ export default class EditSalModal extends Component{
         CustomerId: this.props.sale.customer.id,
         ProductId: this.props.sale.product.id,
         StoreId: this.props.sale.store.id,
-        Date: this.props.sale.dateSold
+        Date:moment(this.props.sale.dateSold).format("DD-MM-YYYY")
+
       
     }
 
@@ -134,12 +135,8 @@ export default class EditSalModal extends Component{
 
 
     // this.state.DateSold= moment(new Date(this.props.sales.dateSold)).format(YYYY-MM-DD);
-const format2 = "YYYY-MM-DD"
-var date1 = new Date(this.props.sales.dateSold);
 
-var dateTime1 = moment(date1).format(format2);
 
-    console.log('day'+dateTime1);
     return (
       <div>
       <Button color="yellow" onClick={ (e) => this.setState({modalOpen: true})}>
