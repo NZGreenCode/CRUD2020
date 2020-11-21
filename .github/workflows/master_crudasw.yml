@@ -31,5 +31,5 @@ jobs:
       with:
         app-name: 'crudasw'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_39fc5f8e2cb04c768918db3bd68a96af }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_3b32fcac106c41cab17c64c2587430aa }}
         package: ${{env.DOTNET_ROOT}}/myapp 
