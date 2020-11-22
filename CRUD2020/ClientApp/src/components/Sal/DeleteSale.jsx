@@ -25,9 +25,11 @@ export default class DeleteSale extends Component{
 
     console.log(this.state);
     axios.delete('Sales/DeleteSales/' + this.props.salid)
-        // this.props.sales();
-        // window.location.reload();
-        this.props.sales();
+   .then(prediction=>{
+      console.log(prediction);
+      this.props.sales();
+    })        
+      this.setState({modalOpen:false});
     }
     render() {
 

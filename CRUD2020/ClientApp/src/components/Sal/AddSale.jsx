@@ -2,6 +2,7 @@ import React,{Component} from 'react'
 import { Form,Icon,Header,Button,Modal,Dropdown  } from 'semantic-ui-react'
 import axios from 'axios'
 import 'react-dropdown/style.css';
+import moment from 'moment'
 
 
 export default class AddSale extends Component{
@@ -29,7 +30,9 @@ export default class AddSale extends Component{
   handleClose=()=> this.setState({modalOpen:false});
   
   handleChangeCusDrop = event => {
-    this.setState({CustomerID:event.target.value})
+      this.setState({ CustomerID: event.target.value })
+      console.log('<<>>' + event.target.value);
+
     
     }
     handleChangeProDrop = event => {
@@ -41,7 +44,9 @@ export default class AddSale extends Component{
       }
     
     handleChangeDate = event => {
-      this.setState({Date:event.target.value})
+        this.setState({
+            Date:moment(event.target.value).format("DD-MM-YYYY")
+        })
     }
           
     
@@ -62,10 +67,14 @@ export default class AddSale extends Component{
       }),
       { headers: {'Content-Type': 'application/json','Accept': 'application/json'}})
         .then(prediction=>{
-          console.log(prediction);
+          console.log('what'+prediction);
           this.props.sales();
         })
         this.setState({modalOpen:false});
+        this.state.CustomerID='';
+        this.state.ProductID='';
+        this.state.StoreID='';
+
     
       }
   componentDidMount(){
@@ -200,7 +209,6 @@ export default class AddSale extends Component{
                 <option 
                 key={proOp.id} 
                 value={proOp.id}
-                selected={proOp.id[0]}
                 >{proOp.name}</option>
               )
               )};
