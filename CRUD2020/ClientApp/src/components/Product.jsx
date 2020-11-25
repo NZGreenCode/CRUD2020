@@ -107,7 +107,7 @@ export class Product extends Component {
             return(
                 <tr key={pro.id}>
                   <th >{pro.name}</th>
-                  <th>{pro.price}</th>
+                    <th>{ pro.price }</th>
                   <th>
                       <EditProduct product={pro} products={this.getAllProducts}/>
                   </th>
