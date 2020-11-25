@@ -21,7 +21,7 @@
     },
     "resourceName": {
       "type": "string",
-      "defaultValue": "crudasw",
+      "defaultValue": "CRUD202020201125190742",
       "metadata": {
         "description": "Name of the main resource to be created by this template."
       }
